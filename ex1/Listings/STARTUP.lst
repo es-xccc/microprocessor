@@ -1,0 +1,58 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              09/25/2023 22:07:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H ; start address is 00H
+0000 90001E            2     MOV DPTR, #TABLE ; DPTR point to TABLE
+0003 7804              3     START: MOV R0, #4 ; 4 LED
+0005 7900              4     MOV R1, #0 ; table index
+0007 7AFE              5     MOV R2, #0FEH ; LED drive pin(c0~c3)
+0009 8AA0              6     LOOP: MOV P2, R2 ; select LED
+000B E9                7     MOV A, R1 ; move R1 to A
+000C 93                8     MOVC A, @A+DPTR ; get value from table
+000D F590              9     MOV P1, A ; move value to P1
+000F 1119             10     CALL DELAY ; delay 0.5 ms
+0011 09               11     INC R1 ; increase R1
+0012 EA               12     MOV A, R2 ; move R2 to A
+0013 23               13     RL A ; rotate A
+0014 FA               14     MOV R2, A ; move A back to R2
+0015 D8F2             15     DJNZ R0, LOOP ; decrement R0 until 0
+0017 80EA             16     SJMP START ; jump to start
+0019 7BFA             17     DELAY: MOV R3, #250 ; loop 250 times
+001B DBFE             18     DJNZ R3, $ ; decrement R3 until 0
+001D 22               19     RET ; return from subroutine
+001E C0               20     TABLE: DB 0C0H ; 6
+001F F9               21     DB 0F9H ; 2
+0020 A4               22     DB 0A4H ; 1
+0021 B0               23     DB 0B0H ; 6
+                      24     END ; end of program
+                             ;TABLE: DB 083H ; 6
+                             ;DB 0A4H ; 2
+                             ;DB 0F9H ; 1
+                             ;DB 083H ; 6
+A51 MACRO ASSEMBLER  STARTUP                                                              09/25/2023 22:07:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0019H   A   
+LOOP . . . . . . .  C ADDR   0009H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+START. . . . . . .  C ADDR   0003H   A   
+TABLE. . . . . . .  C ADDR   001EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
