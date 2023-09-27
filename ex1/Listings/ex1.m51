@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/25/2023  22:07:09  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/27/2023  16:49:55  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\ex1 (STARTUP)
 * RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0022H BYTE ( 1%) *
 ******************************************************************************
 
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/25/2023  22:07:09  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  09/27/2023  16:49:55  PAGE 2
 
 
 Program Size: data=8.0 xdata=0 code=34

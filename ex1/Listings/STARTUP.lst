@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              09/25/2023 22:07:09 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 16:49:55 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -27,16 +27,16 @@ LOC  OBJ            LINE     SOURCE
 0019 7BFA             17     DELAY: MOV R3, #250 ; loop 250 times
 001B DBFE             18     DJNZ R3, $ ; decrement R3 until 0
 001D 22               19     RET ; return from subroutine
-001E C0               20     TABLE: DB 0C0H ; 6
-001F F9               21     DB 0F9H ; 2
-0020 A4               22     DB 0A4H ; 1
-0021 B0               23     DB 0B0H ; 6
+001E 83               20     TABLE: DB 083H ; 6
+001F A4               21     DB 0A4H ; 2
+0020 F9               22     DB 0F9H ; 1
+0021 83               23     DB 083H ; 6
                       24     END ; end of program
                              ;TABLE: DB 083H ; 6
                              ;DB 0A4H ; 2
                              ;DB 0F9H ; 1
                              ;DB 083H ; 6
-A51 MACRO ASSEMBLER  STARTUP                                                              09/25/2023 22:07:09 PAGE     2
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 16:49:55 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
