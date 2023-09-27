@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 16:49:55 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 17:19:26 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -36,7 +36,7 @@ LOC  OBJ            LINE     SOURCE
                              ;DB 0A4H ; 2
                              ;DB 0F9H ; 1
                              ;DB 083H ; 6
-A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 16:49:55 PAGE     2
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 17:19:26 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------

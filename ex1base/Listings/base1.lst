@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  BASE1                                                                09/27/2023 17:20:51 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\base1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE base1.A51 SET(SMALL) DEBUG PRINT(.\Listings\base1.lst) OBJECT(.\Objects
+                      \base1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H ; start address 00H
+0000 74FE              2     MOV A, #11111110B ; set A to 11111110B
+0002 F590              3     LOOP: MOV P1, A ; move A to P1
+0004 1109              4     CALL DELAY ; delay 0.5 sec
+0006 23                5     RL A ; rotate left
+0007 80F9              6     SJMP LOOP ; main loop
+0009 7804              7     DELAY: MOV R0, #4 ; loop 4 times
+000B 79FA              8     LOOP1: MOV R1, #250 ; loop 250 times
+000D 7AFA              9     LOOP2: MOV R2, #250 ; loop 250 times
+000F DAFE             10     DJNZ R2, $ ; decrement R2 until 0
+0011 D9FA             11     DJNZ R1, LOOP2 ; decrement R1 until 0
+0013 D8F6             12     DJNZ R0, LOOP1 ; decrement R0 until 0
+0015 22               13     RET ; return from subroutine
+                      14     END ; end of program
+A51 MACRO ASSEMBLER  BASE1                                                                09/27/2023 17:20:51 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   0009H   A   
+LOOP . . . . . . .  C ADDR   0002H   A   
+LOOP1. . . . . . .  C ADDR   000BH   A   
+LOOP2. . . . . . .  C ADDR   000DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
