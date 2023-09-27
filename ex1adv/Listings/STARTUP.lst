@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 17:19:26 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 18:40:20 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -9,7 +9,7 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PR
 LOC  OBJ            LINE     SOURCE
 
 0000                   1     ORG 00H ; start address is 00H
-0000 90001E            2     MOV DPTR, #TABLE ; DPTR point to TABLE
+0000 900026            2     MOV DPTR, #TABLE ; DPTR point to TABLE
 0003 7804              3     START: MOV R0, #4 ; 4 LED
 0005 7900              4     MOV R1, #0 ; table index
 0007 7AFE              5     MOV R2, #0FEH ; LED drive pin(c0~c3)
@@ -24,19 +24,22 @@ LOC  OBJ            LINE     SOURCE
 0014 FA               14     MOV R2, A ; move A back to R2
 0015 D8F2             15     DJNZ R0, LOOP ; decrement R0 until 0
 0017 80EA             16     SJMP START ; jump to start
-0019 7BFA             17     DELAY: MOV R3, #250 ; loop 250 times
-001B DBFE             18     DJNZ R3, $ ; decrement R3 until 0
-001D 22               19     RET ; return from subroutine
-001E 83               20     TABLE: DB 083H ; 6
-001F A4               21     DB 0A4H ; 2
-0020 F9               22     DB 0F9H ; 1
-0021 83               23     DB 083H ; 6
-                      24     END ; end of program
-                             ;TABLE: DB 083H ; 6
-                             ;DB 0A4H ; 2
-                             ;DB 0F9H ; 1
-                             ;DB 083H ; 6
-A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 17:19:26 PAGE     2
+                      17     
+                      18     
+0019 7C04             19     DELAY: MOV R4, #4 ; loop 4 times
+001B 7DFA             20     LOOP1: MOV R5, #250 ; loop 250 times
+001D 7EFA             21     LOOP2: MOV R6, #250 ; loop 250 times
+001F DEFE             22     DJNZ R6, $ ; decrement R2 until 0
+0021 DDFA             23     DJNZ R5, LOOP2 ; decrement R1 until 0
+0023 DCF6             24     DJNZ R4, LOOP1 ; decrement R0 until 0
+0025 22               25     RET ; return from subroutine
+                      26     
+0026 83               27     TABLE: DB 083H ; 0
+0027 A4               28     DB 0A4H ; 1
+0028 F9               29     DB 0F9H ; 2
+0029 83               30     DB 083H ; 3
+                      31     END ; end of program
+A51 MACRO ASSEMBLER  STARTUP                                                              09/27/2023 18:40:20 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -46,10 +49,12 @@ N A M E             T Y P E  V A L U E   ATTRIBUTES
 
 DELAY. . . . . . .  C ADDR   0019H   A   
 LOOP . . . . . . .  C ADDR   0009H   A   
+LOOP1. . . . . . .  C ADDR   001BH   A   
+LOOP2. . . . . . .  C ADDR   001DH   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 P2 . . . . . . . .  D ADDR   00A0H   A   
 START. . . . . . .  C ADDR   0003H   A   
-TABLE. . . . . . .  C ADDR   001EH   A   
+TABLE. . . . . . .  C ADDR   0026H   A   
 
 
 REGISTER BANK(S) USED: 0 

@@ -14,15 +14,18 @@ RL A ; rotate A
 MOV R2, A ; move A back to R2
 DJNZ R0, LOOP ; decrement R0 until 0
 SJMP START ; jump to start
-DELAY: MOV R3, #250 ; loop 250 times
-DJNZ R3, $ ; decrement R3 until 0
+
+
+DELAY: MOV R4, #4 ; loop 4 times
+LOOP1: MOV R5, #250 ; loop 250 times
+LOOP2: MOV R6, #250 ; loop 250 times
+DJNZ R6, $ ; decrement R2 until 0
+DJNZ R5, LOOP2 ; decrement R1 until 0
+DJNZ R4, LOOP1 ; decrement R0 until 0
 RET ; return from subroutine
-TABLE: DB 083H ; 6
-DB 0A4H ; 2
-DB 0F9H ; 1
-DB 083H ; 6
+
+TABLE: DB 083H ; 0
+DB 0A4H ; 1
+DB 0F9H ; 2
+DB 083H ; 3
 END ; end of program
-;TABLE: DB 083H ; 6
-;DB 0A4H ; 2
-;DB 0F9H ; 1
-;DB 083H ; 6
