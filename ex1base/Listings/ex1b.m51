@@ -1,8 +1,9 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/27/2023  17:48:25  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    09/28/2023  12:50:00  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\base1.obj TO .\Objects\ex1b PRINT (.\Listings\ex1b.m51) RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\base1.obj TO .\Objects\ex1b PRINT (.\Listings\ex1b.m51) RAMSIZE (256) CODE (0X0000
+>> -0X1FFF)
 
 
 INPUT MODULES INCLUDED:

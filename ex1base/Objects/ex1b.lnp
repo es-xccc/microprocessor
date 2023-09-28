@@ -1,3 +1,4 @@
 ".\Objects\base1.obj" 
 TO ".\Objects\ex1b" 
 PRINT(".\Listings\ex1b.m51") RAMSIZE(256) 
+CODE( 0X0000-0X1FFF )
