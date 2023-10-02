@@ -1,0 +1,69 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              10/02/2023 10:05:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0 ; start from 0000H
+0000 90002F            2     MOV DPTR, #TABLE ; DPTR point to TABLE
+0003 7800              3     START: MOV R0, #0 ; initialize typed signal
+0005 7903              4     MOV R1, #3 ; set 3 rows
+0007 7AF7              5     MOV R2, #11110111B ; scan first row
+0009 EA                6     SCAN: MOV A, R2 ; move R2 to A
+000A F5A0              7     MOV P2, A ; input scanned signal
+000C 30A70F            8     JNB P2.7, KEYIN ; scan column 1
+000F 08                9     INC R0 ; add #001H into R0
+0010 30A60B           10     JNB P2.6, KEYIN ; scan column 2
+0013 08               11     INC R0 ; add #001H into R0
+0014 30A507           12     JNB P2.5, KEYIN ; scan column 3
+0017 08               13     INC R0 ; add #001H into R0
+0018 03               14     RR A ; next row
+0019 FA               15     MOV R2, A ; move A to R2
+001A D9ED             16     DJNZ R1, SCAN ; scan 3 rows
+001C 80E5             17     SJMP START ; jump to scan keypad again
+001E 1126             18     KEYIN: CALL DEBOUNCE ; call debounce function
+0020 E8               19     MOV A, R0 ; get typed signal
+0021 93               20     MOVC A, @A+DPTR ; get signal from TABLE
+0022 F590             21     MOV P1, A ; output displayed signal
+0024 80DD             22     SJMP START ; jump to scan keypad again
+0026 7C32             23     DEBOUNCE: MOV R4, #50 ; move 50 times into R4
+0028 7BFA             24     DE_500_us: MOV R3, #250 ; move 250 times into R3
+002A DBFE             25     DJNZ R3, $ ; jump to itself R3 times
+002C DCFA             26     DJNZ R4, DE_500_us ; delay 25ms
+002E 22               27     RET ; return to main code
+002F 9F               28     TABLE: DB 10011111B ; display "1"
+0030 25               29     DB 00100101B ; display "2"
+0031 0D               30     DB 00001101B ; display "3"
+0032 99               31     DB 10011001B ; display "4"
+0033 49               32     DB 01001001B ; display "5"
+0034 41               33     DB 01000001B ; display "6"
+0035 1B               34     DB 00011011B ; display "7"
+0036 01               35     DB 00000001B ; display "8"
+0037 09               36     DB 00001001B ; display "9"
+                      37     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/02/2023 10:05:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DEBOUNCE . . . . .  C ADDR   0026H   A   
+DE_500_US. . . . .  C ADDR   0028H   A   
+KEYIN. . . . . . .  C ADDR   001EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SCAN . . . . . . .  C ADDR   0009H   A   
+START. . . . . . .  C ADDR   0003H   A   
+TABLE. . . . . . .  C ADDR   002FH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

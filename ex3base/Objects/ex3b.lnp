@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj" 
+TO ".\Objects\ex3b" 
+PRINT(".\Listings\ex3b.m51") RAMSIZE(256) 
+CODE( 0X0000-0X1FFF )
