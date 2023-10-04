@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/02/2023 10:06:27 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/04/2023 15:34:29 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -9,43 +9,52 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PR
 LOC  OBJ            LINE     SOURCE
 
 0000                   1     ORG 0 ; start from 0000H
-0000 90002F            2     MOV DPTR, #TABLE ; DPTR point to TABLE
+0000 900033            2     MOV DPTR, #TABLE ; DPTR point to TABLE
 0003 7800              3     START: MOV R0, #0 ; initialize typed signal
-0005 7903              4     MOV R1, #3 ; set 3 rows
+0005 7904              4     MOV R1, #4 ; set 3 rows
 0007 7AF7              5     MOV R2, #11110111B ; scan first row
 0009 EA                6     SCAN: MOV A, R2 ; move R2 to A
 000A F5A0              7     MOV P2, A ; input scanned signal
-000C 30A70F            8     JNB P2.7, KEYIN ; scan column 1
+000C 30A713            8     JNB P2.7, KEYIN ; scan column 1
 000F 08                9     INC R0 ; add #001H into R0
-0010 30A60B           10     JNB P2.6, KEYIN ; scan column 2
+0010 30A60F           10     JNB P2.6, KEYIN ; scan column 2
 0013 08               11     INC R0 ; add #001H into R0
-0014 30A507           12     JNB P2.5, KEYIN ; scan column 3
+0014 30A50B           12     JNB P2.5, KEYIN ; scan column 3
 0017 08               13     INC R0 ; add #001H into R0
-0018 03               14     RR A ; next row
-0019 FA               15     MOV R2, A ; move A to R2
-001A D9ED             16     DJNZ R1, SCAN ; scan 3 rows
-001C 80E5             17     SJMP START ; jump to scan keypad again
-001E 1126             18     KEYIN: CALL DEBOUNCE ; call debounce function
-0020 E8               19     MOV A, R0 ; get typed signal
-0021 93               20     MOVC A, @A+DPTR ; get signal from TABLE
-0022 F590             21     MOV P1, A ; output displayed signal
-0024 80DD             22     SJMP START ; jump to scan keypad again
-0026 7C32             23     DEBOUNCE: MOV R4, #50 ; move 50 times into R4
-0028 7BFA             24     DE_500_us: MOV R3, #250 ; move 250 times into R3
-002A DBFE             25     DJNZ R3, $ ; jump to itself R3 times
-002C DCFA             26     DJNZ R4, DE_500_us ; delay 25ms
-002E 22               27     RET ; return to main code
-002F 9F               28     TABLE: DB 10011111B ; display "1"
-0030 25               29     DB 00100101B ; display "2"
-0031 0D               30     DB 00001101B ; display "3"
-0032 99               31     DB 10011001B ; display "4"
-0033 49               32     DB 01001001B ; display "5"
-0034 41               33     DB 01000001B ; display "6"
-0035 1B               34     DB 00011011B ; display "7"
-0036 01               35     DB 00000001B ; display "8"
-0037 09               36     DB 00001001B ; display "9"
-                      37     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/02/2023 10:06:27 PAGE     2
+0018 30A407           14     JNB P2.4, KEYIN ; scan column 4
+001B 08               15     INC R0 ; add #001H into R0
+001C 03               16     RR A ; next row
+001D FA               17     MOV R2, A ; move A to R2
+001E D9E9             18     DJNZ R1, SCAN ; scan 3 rows
+0020 80E1             19     SJMP START ; jump to scan keypad again
+0022 112A             20     KEYIN: CALL DEBOUNCE ; call debounce function
+0024 E8               21     MOV A, R0 ; get typed signal
+0025 93               22     MOVC A, @A+DPTR ; get signal from TABLE
+0026 F590             23     MOV P1, A ; output displayed signal
+0028 80D9             24     SJMP START ; jump to scan keypad again
+002A 7C32             25     DEBOUNCE: MOV R4, #50 ; move 50 times into R4
+002C 7BFA             26     DE_500_us: MOV R3, #250 ; move 250 times into R3
+002E DBFE             27     DJNZ R3, $ ; jump to itself R3 times
+0030 DCFA             28     DJNZ R4, DE_500_us ; delay 25ms
+0032 22               29     RET ; return to main code
+0033 9F               30     TABLE: DB 10011111B ; display "1"
+0034 25               31     DB 00100101B ; display "2"
+0035 0D               32     DB 00001101B ; display "3"
+0036 11               33     DB 00010001B ; A
+0037 99               34     DB 10011001B ; display "4"
+0038 49               35     DB 01001001B ; display "5"
+0039 41               36     DB 01000001B ; display "6"
+003A C1               37     DB 11000001B ; b
+003B 1B               38     DB 00011011B ; display "7"
+003C 01               39     DB 00000001B ; display "8"
+003D 09               40     DB 00001001B ; display "9"
+003E E5               41     DB 11100101B ; c
+003F 61               42     DB 01100001B ; E
+0040 03               43     DB 00000011B ; 0
+0041 71               44     DB 01110001B ; F
+0042 85               45     DB 10000101B ; d
+                      46     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/04/2023 15:34:29 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -53,14 +62,14 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-DEBOUNCE . . . . .  C ADDR   0026H   A   
-DE_500_US. . . . .  C ADDR   0028H   A   
-KEYIN. . . . . . .  C ADDR   001EH   A   
+DEBOUNCE . . . . .  C ADDR   002AH   A   
+DE_500_US. . . . .  C ADDR   002CH   A   
+KEYIN. . . . . . .  C ADDR   0022H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 P2 . . . . . . . .  D ADDR   00A0H   A   
 SCAN . . . . . . .  C ADDR   0009H   A   
 START. . . . . . .  C ADDR   0003H   A   
-TABLE. . . . . . .  C ADDR   002FH   A   
+TABLE. . . . . . .  C ADDR   0033H   A   
 
 
 REGISTER BANK(S) USED: 0 
