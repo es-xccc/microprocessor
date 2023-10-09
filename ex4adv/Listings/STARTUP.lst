@@ -1,0 +1,155 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              10/09/2023 23:52:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0 ; start from 0000H
+0000 900095            2     MOV DPTR, #TABLE ; DPTR point to TABLE
+0003                   3     START:
+0003 7800              4                     MOV R0, #0 ; initialize typed signal
+0005 7903              5                     MOV R1, #3 ; set 3 rows
+0007 7AF7              6                     MOV R2, #11110111B ; scan first row
+0009                   7     SCAN:
+0009 EA                8                     MOV A, R2 ; move R2 to A
+000A F5A0              9                     MOV P2, A ; input scanned signal
+000C 30A70F           10                     JNB P2.7, KEYIN0 ; scan column 1
+000F 08               11                     INC R0 ; add #001H into R0
+0010 30A60B           12                     JNB P2.6, KEYIN0 ; scan column 2
+0013 08               13                     INC R0 ; add #001H into R0
+0014 30A507           14                     JNB P2.5, KEYIN0 ; scan column 3
+0017 08               15                     INC R0 ; add #001H into R0
+0018 03               16                     RR A ; next row
+0019 FA               17                     MOV R2, A ; move A to R2
+001A D9ED             18                     DJNZ R1, SCAN ; scan 3 rows
+001C 80E5             19                     SJMP START ; jump to scan keypad again
+001E                  20     KEYIN0:
+001E E8               21                     MOV A, R0
+001F FE               22                     MOV R6, A
+0020                  23                     START1:
+0020 7800             24                                     MOV R0, #0 ; initialize typed signal
+0022 7903             25                                     MOV R1, #3 ; set 3 rows
+0024 7AF7             26                                     MOV R2, #11110111B ; scan first row
+0026                  27                     SCAN1:
+0026 EA               28                                     MOV A, R2 ; move R2 to A
+0027 F5A0             29                                     MOV P2, A ; input scanned signal
+0029 30A70F           30                                     JNB P2.7, KEYIN1 ; scan column 1
+002C 08               31                                     INC R0 ; add #001H into R0
+002D 30A60B           32                                     JNB P2.6, KEYIN1 ; scan column 2
+0030 08               33                                     INC R0 ; add #001H into R0
+0031 30A507           34                                     JNB P2.5, KEYIN1 ; scan column 3
+0034 08               35                                     INC R0 ; add #001H into R0
+0035 03               36                                     RR A ; next row
+0036 FA               37                                     MOV R2, A ; move A to R2
+0037 D9ED             38                                     DJNZ R1, SCAN1 ; scan 3 rows
+0039 80E5             39                                     SJMP START1 ; jump to scan keypad again
+003B                  40     KEYIN1:
+003B E8               41                     MOV A, R0
+003C FF               42                     MOV R7, A
+003D                  43                     KEYIN2:
+003D 75A0EF           44                                     MOV P2, #11101111B
+0040 30A30B           45                                     JNB P2.3, PLUS
+0043 30A214           46                                     JNB P2.2, MINUS
+0046 30A11D           47                                     JNB P2.1, DOT
+0049 30A025           48                                     JNB P2.0, DIVIDE
+004C 80EF             49                                     SJMP KEYIN2
+                      50     
+                      51     
+004E                  52     PLUS:
+004E 1187             53                     CALL DEBOUNCE
+0050 EE               54                     MOV A, R6
+0051 8FF0             55                     MOV B, R7
+0053 25F0             56                     ADD A, B
+0055 93               57                     MOVC A, @A+DPTR
+A51 MACRO ASSEMBLER  STARTUP                                                              10/09/2023 23:52:28 PAGE     2
+
+0056 F590             58                     MOV P1, A
+0058 80A9             59                     SJMP START
+005A                  60     MINUS:
+005A 1187             61                     CALL DEBOUNCE
+005C EE               62                     MOV A, R6
+005D 8FF0             63                     MOV B, R7
+005F 95F0             64                     SUBB A, B
+0061 93               65                     MOVC A, @A+DPTR
+0062 F590             66                     MOV P1, A
+0064 809D             67                     SJMP START
+0066                  68     DOT:
+0066 1187             69                     CALL DEBOUNCE
+0068 EE               70                     MOV A, R6
+0069 8FF0             71                     MOV B, R7
+006B A4               72                     MUL AB
+006C 93               73                     MOVC A, @A+DPTR
+006D F590             74                     MOV P1, A
+006F 8092             75                     SJMP START
+0071                  76     DIVIDE:
+0071 1187             77                     CALL DEBOUNCE
+0073 EE               78                     MOV A, R6
+0074 8FF0             79                     MOV B, R7
+0076 84               80                     DIV AB
+0077 93               81                     MOVC A, @A+DPTR
+0078 F590             82                     MOV P1, A
+007A 1190             83                     CALL DELAY250
+007C E5F0             84                     MOV A, B
+007E 93               85                     MOVC A, @A+DPTR
+007F 759000           86                     MOV P1, #000H
+0082 F590             87                     MOV P1, A
+0084 020003           88                     LJMP START
+                      89     
+                      90     
+0087 7C32             91     DEBOUNCE: MOV R4, #50 ; move 50 times into R4
+0089                  92     DE_500_us:
+0089 7BFA             93                     MOV R3, #250 ; move 250 times into R3
+008B DBFE             94                     DJNZ R3, $ ; jump to itself R3 times
+008D DCFA             95                     DJNZ R4, DE_500_us ; delay 25ms
+008F 22               96                     RET ; return to main code
+0090                  97     DELAY250:
+0090 7D0A             98                     MOV R5, #10
+0092 DDF5             99                     DJNZ R5, DE_500_us
+0094 22              100                     RET
+0095                 101     TABLE:
+0095 9F              102                     DB 10011111B ; display "1"
+0096 25              103                     DB 00100101B ; display "2"
+0097 0D              104                     DB 00001101B ; display "3"
+0098 99              105                     DB 10011001B ; display "4"
+0099 49              106                     DB 01001001B ; display "5"
+009A 41              107                     DB 01000001B ; display "6"
+009B 1B              108                     DB 00011011B ; display "7"
+009C 01              109                     DB 00000001B ; display "8"
+009D 09              110                     DB 00001001B ; display "9"
+                     111     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/09/2023 23:52:28 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DEBOUNCE . . . . .  C ADDR   0087H   A   
+DELAY250 . . . . .  C ADDR   0090H   A   
+DE_500_US. . . . .  C ADDR   0089H   A   
+DIVIDE . . . . . .  C ADDR   0071H   A   
+DOT. . . . . . . .  C ADDR   0066H   A   
+KEYIN0 . . . . . .  C ADDR   001EH   A   
+KEYIN1 . . . . . .  C ADDR   003BH   A   
+KEYIN2 . . . . . .  C ADDR   003DH   A   
+MINUS. . . . . . .  C ADDR   005AH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PLUS . . . . . . .  C ADDR   004EH   A   
+SCAN . . . . . . .  C ADDR   0009H   A   
+SCAN1. . . . . . .  C ADDR   0026H   A   
+START. . . . . . .  C ADDR   0003H   A   
+START1 . . . . . .  C ADDR   0020H   A   
+TABLE. . . . . . .  C ADDR   0095H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
