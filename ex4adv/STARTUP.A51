@@ -1,102 +1,107 @@
 ORG 0 ; start from 0000H
 MOV DPTR, #TABLE ; DPTR point to TABLE
-MOV R6, #9
+MOV R5, #2
 START:
-		MOV R0, #0 ; initialize typed signal
-		MOV R1, #3 ; set 3 rows
+		MOV R0, #1 ; initialize typed signal
+		MOV R1, #4 ; set 3 rows
 		MOV R2, #11110111B ; scan first row
 SCAN:
 		MOV A, R2 ; move R2 to A
 		MOV P2, A ; input scanned signal
-		JNB P2.7, RE6 ; scan column 1
+		JNB P2.7, KEYIN ; scan column 1
 		INC R0 ; add #001H into R0
-		JNB P2.6, RE6 ; scan column 2
+		JNB P2.6, KEYIN ; scan column 2
 		INC R0 ; add #001H into R0
-		JNB P2.5, RE6 ; scan column 3
+		JNB P2.5, KEYIN ; scan column 3
 		INC R0 ; add #001H into R0
+		JNB P2.4, CAL
 		RR A ; next row
 		MOV R2, A ; move A to R2
 		DJNZ R1, SCAN ; scan 3 rows
 		SJMP START ; jump to scan keypad again
-RE6:
-		CJNE R6, #9, RE7
+KEYIN:
+		CALL DEBOUNCE
 		MOV A, R0
+		DJNZ R5, KEYIN2
 		MOV R6, A
-		SJMP SCAN
-RE7:	
-		MOV A, R0
-		MOV R7, A
+		SJMP START
+KEYIN2:	
+		CALL DEBOUNCE
+		MOV B, A
+		SJMP START
 CAL:
-		MOV P2, #11101111B
 		JNB P2.3, PLUS
 		JNB P2.2, MINUS
 		JNB P2.1, DOT
 		JNB P2.0, DIVIDE
-		SJMP CAL
 
 
 PLUS:
-		CALL DEBOUNCE
 		MOV A, R6
-		MOV B, R7
-		ADD A, B
+		ADD	A, B
+		MOV	B, #10 
+		DIV AB
 		MOVC A, @A+DPTR
-		MOV P1, A
-		MOV R6, #9
+		MOV P1, A 
+		CALL DELAY250
+		MOV A, B
+		MOVC A, @A+DPTR
+		MOV P1, A 
+		CALL DELAY250
+		MOV R5,#2
 		SJMP START
 MINUS:
-		CALL DEBOUNCE
-		MOV A, R6
-		MOV B, R7
+		MOV  A, R6
 		SUBB A, B
-		MOVC A, @A+DPTR
-		MOV P1, A
-		MOV R6, #9
+		MOVC A, @A+DPTR 
+		MOV P1, A 
+		MOV R5, #2
 		SJMP START
 DOT:
-		CALL DEBOUNCE
 		MOV A, R6
-		MOV B, R7
 		MUL AB
-		MOV B, #10
+		MOV	B, #10
 		DIV AB
-		MOV R6, A
-		MOV A, B
-		MOVC A, @A+DPTR
+		MOVC A, @A+DPTR ;
 		MOV P1, A
 		CALL DELAY250
-		MOV A, R6
-		MOVC A, @A+DPTR
-		MOV P1, A
-		MOV R6, #9
+		MOV A, B
+		MOVC A, @A+DPTR 
+		MOV P1, A     
+		CALL DELAY250
+		MOV R5,#2;
 		SJMP START
 DIVIDE:
-		CALL DEBOUNCE
 		MOV A, R6
-		MOV B, R7
 		DIV AB
 		MOVC A, @A+DPTR
-		MOV P1, A
+		MOV P1, A 
 		CALL DELAY250
-		MOV A, B
-		MOVC A, @A+DPTR
-		MOV P1, #000H
-		MOV P1, A
-		MOV R6, #9
+		MOV  A, B
+		MOVC A, @A+DPTR 
+		MOV P1, A 
+		MOV R5,#2
 		LJMP START
 
 
-DEBOUNCE: MOV R4, #50 ; move 50 times into R4
+DEBOUNCE:
+		MOV R4, #50 ; move 50 times into R4
 DE_500_us:
 		MOV R3, #250 ; move 250 times into R3
 		DJNZ R3, $ ; jump to itself R3 times
 		DJNZ R4, DE_500_us ; delay 25ms
 		RET ; return to main code
 DELAY250:
-		MOV R5, #10
-		DJNZ R5, DE_500_us
-		RET
+		MOV R4, #250 ; move 50 times into R4
+LOOP1:
+		MOV R3, #250 ; move 250 times into R3
+		DJNZ R3, $ ; jump to itself R3 times
+		MOV R3, #250 ; move 250 times into R3
+		DJNZ R3, $ ; jump to itself R3 times
+		DJNZ R4, LOOP1 ; delay 25ms
+		RET ; return to main code
 TABLE:
+		DB 00000011B ; 0
 		DB 10011111B ; display "1"
 		DB 00100101B ; display "2"
 		DB 00001101B ; display "3"
