@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/10/2023  19:03:32  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/10/2023  19:12:30  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\ex4adv (STARTUP)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     00A5H     ABSOLUTE     
+            CODE    0000H     00A1H     ABSOLUTE     
 
 
 
@@ -32,21 +32,21 @@ SYMBOL TABLE OF MODULE:  .\Objects\ex4adv (STARTUP)
   -------         MODULE        STARTUP
   D:00F0H         SYMBOL        B
   C:0031H         SYMBOL        CAL
-  C:0085H         SYMBOL        DEBOUNCE
-  C:008EH         SYMBOL        DELAY250
-  C:0087H         SYMBOL        DE_500_US
-  C:0074H         SYMBOL        DIVIDE
-  C:005EH         SYMBOL        DOT
+  C:0081H         SYMBOL        DEBOUNCE
+  C:008AH         SYMBOL        DELAY250
+  C:0083H         SYMBOL        DE_500_US
+  C:0070H         SYMBOL        DIVIDE
+  C:005CH         SYMBOL        DOT
   C:0023H         SYMBOL        KEYIN
   C:002BH         SYMBOL        KEYIN2
-  C:0090H         SYMBOL        LOOP1
-  C:0054H         SYMBOL        MINUS
+  C:008CH         SYMBOL        LOOP1
+  C:0052H         SYMBOL        MINUS
   D:0090H         SYMBOL        P1
   D:00A0H         SYMBOL        P2
   C:003DH         SYMBOL        PLUS
   C:000BH         SYMBOL        SCAN
   C:0005H         SYMBOL        START
-  C:009BH         SYMBOL        TABLE
+  C:0097H         SYMBOL        TABLE
   C:0000H         LINE#         2
   C:0003H         LINE#         3
   C:0005H         LINE#         5
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\ex4adv (STARTUP)
   C:0012H         LINE#         13
   C:0015H         LINE#         14
   C:0016H         LINE#         15
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/10/2023  19:03:32  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/10/2023  19:12:30  PAGE 2
 
 
   C:0019H         LINE#         16
@@ -92,56 +92,54 @@ SYMBOL TABLE OF MODULE:  .\Objects\ex4adv (STARTUP)
   C:004CH         LINE#         49
   C:004EH         LINE#         50
   C:0050H         LINE#         51
-  C:0052H         LINE#         52
-  C:0054H         LINE#         54
+  C:0052H         LINE#         53
+  C:0053H         LINE#         54
   C:0055H         LINE#         55
-  C:0057H         LINE#         56
+  C:0056H         LINE#         56
   C:0058H         LINE#         57
   C:005AH         LINE#         58
-  C:005CH         LINE#         59
-  C:005EH         LINE#         61
-  C:005FH         LINE#         62
-  C:0060H         LINE#         63
-  C:0063H         LINE#         64
-  C:0064H         LINE#         65
+  C:005CH         LINE#         60
+  C:005DH         LINE#         61
+  C:005EH         LINE#         62
+  C:0061H         LINE#         63
+  C:0062H         LINE#         64
+  C:0063H         LINE#         65
   C:0065H         LINE#         66
   C:0067H         LINE#         67
   C:0069H         LINE#         68
-  C:006BH         LINE#         69
+  C:006AH         LINE#         69
   C:006CH         LINE#         70
   C:006EH         LINE#         71
-  C:0070H         LINE#         72
-  C:0072H         LINE#         73
-  C:0074H         LINE#         75
-  C:0075H         LINE#         76
-  C:0076H         LINE#         77
+  C:0070H         LINE#         73
+  C:0071H         LINE#         74
+  C:0072H         LINE#         75
+  C:0073H         LINE#         76
+  C:0075H         LINE#         77
   C:0077H         LINE#         78
   C:0079H         LINE#         79
-  C:007BH         LINE#         80
-  C:007DH         LINE#         81
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/10/2023  19:03:32  PAGE 3
+  C:007AH         LINE#         80
+  C:007CH         LINE#         81
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/10/2023  19:12:30  PAGE 3
 
 
   C:007EH         LINE#         82
-  C:0080H         LINE#         83
-  C:0082H         LINE#         84
-  C:0085H         LINE#         88
+  C:0081H         LINE#         86
+  C:0083H         LINE#         88
+  C:0085H         LINE#         89
   C:0087H         LINE#         90
   C:0089H         LINE#         91
-  C:008BH         LINE#         92
-  C:008DH         LINE#         93
-  C:008EH         LINE#         95
+  C:008AH         LINE#         93
+  C:008CH         LINE#         95
+  C:008EH         LINE#         96
   C:0090H         LINE#         97
   C:0092H         LINE#         98
   C:0094H         LINE#         99
   C:0096H         LINE#         100
-  C:0098H         LINE#         101
-  C:009AH         LINE#         102
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00A5H BYTE ( 8%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00A1H BYTE ( 7%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=165
+Program Size: data=8.0 xdata=0 code=161
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
