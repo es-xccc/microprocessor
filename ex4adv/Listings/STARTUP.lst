@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/10/2023 19:12:29 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/11/2023 20:39:23 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
 0055 93               55                     MOVC A, @A+DPTR
 0056 F590             56                     MOV P1, A
 0058 7D02             57                     MOV R5, #2
-A51 MACRO ASSEMBLER  STARTUP                                                              10/10/2023 19:12:29 PAGE     2
+A51 MACRO ASSEMBLER  STARTUP                                                              10/11/2023 20:39:23 PAGE     2
 
 005A 80A9             58                     SJMP START
 005C                  59     DOT:
@@ -122,7 +122,7 @@ LOC  OBJ            LINE     SOURCE
 009F 01              110                     DB 00000001B ; display "8"
 00A0 09              111                     DB 00001001B ; display "9"
                      112     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/10/2023 19:12:29 PAGE     3
+A51 MACRO ASSEMBLER  STARTUP                                                              10/11/2023 20:39:23 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
