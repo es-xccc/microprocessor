@@ -1,7 +1,8 @@
 ORG 0
-MOV A, #064H
-MOV B, #00DH
-ADD A, B
-MOV B, #006H
-DIV AB
+MOV A, #10111101B
+ANL A, #11101111B
+MOV B,A
+MOV A, #01000010B ; move 01000010B into ACC
+ORL A, #00010000B ; use OR Gate to turn Bit 4 into 1
+CPL A ; use NOT Gate
 END
