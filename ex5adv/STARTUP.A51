@@ -40,7 +40,6 @@ LOOP0:
 				JNB P1.0, PUSH1
 				JNB P1.4, POPALL
 				DJNZ R6, TEMP0
-		MOV R6, #250 ; move 250 times into R3
 		DJNZ R7, LOOP0 ; delay 25ms
 		RET ; return to main code
 DEBOUNCE:
