@@ -1,0 +1,62 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              10/12/2023 23:39:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000h
+0000 802E              2     JMP LOOP ;jump into loop
+0030                   3     ORG 0030h
+0030 758132            4     LOOP: MOV SP, #32H ;SP = #32H
+0033 74FE              5     MOV A, #0xfe ;A = #0xfe
+0035 F5A0              6     MOV P2, A ;P2 = A 
+0037 D290              7     SETB P1.0 ;set p1.0 to high
+0039 7808              8     MOV R0, #8d ;set the execution times of marquee
+003B 309002            9     JNB P1.0, MARQUEE ;jump into marquee when p1.0 is low
+003E 80F0             10     JMP LOOP ;infinite loop
+0040 C000             11     MARQUEE: PUSH 00h ;push the value of R0 into stack
+0042 78FA             12     MOV R0, #250d ;set the execution times of DELAY1
+0044 114F             13     CALL DELAY1 ;call DELAY1
+0046 D000             14     POP 00h
+                      15     ;pop out the value of R0 which is pushed in line 9
+0048 23               16     RL A ;left rotate A(left shift)
+0049 F5A0             17     MOV P2, A ;set the value of A into P2
+004B D8F3             18     DJNZ R0, MARQUEE
+                      19     ;loop back until MARQUEE execute 8 times
+004D 80E1             20     JMP LOOP ;end of MARQUEE, back to LOOP
+004F C000             21     DELAY1: PUSH 00h
+                      22     ;push the remain times of DELAY1 into stack
+0051 78FA             23     MOV R0, #250d ;set the execution times of DELAY2
+0053 115A             24     CALL DELAY2 ;call DELAY2
+0055 D000             25     POP 00h
+                      26     ;pop the remain times of DELAY1 back to R0
+0057 D8F6             27     DJNZ R0, DELAY1 ;loop until R0 is 0
+0059 22               28     RET ;return to MARQUEE
+005A D8FE             29     DELAY2: DJNZ R0, DELAY2 ;loop untie R0 is 0
+005C 22               30     RET ;return to DELAY1
+                      31     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/12/2023 23:39:53 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY1 . . . . . .  C ADDR   004FH   A   
+DELAY2 . . . . . .  C ADDR   005AH   A   
+LOOP . . . . . . .  C ADDR   0030H   A   
+MARQUEE. . . . . .  C ADDR   0040H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,57 @@
+ORG 0000H
+JMP RUN ;jump into loop
+ORG 0030H
+RUN:
+		MOV SP, #32H
+		MOV A, #00000011B
+		MOV R0, A
+		MOV P2, A
+		SETB P1.0
+		SETB P1.4
+		RL A
+		ACALL DAD250
+		SJMP RUN
+PUSH1:
+	ACALL DEBOUNCE
+	PUSH 00H
+	RET
+PAD:
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	ACALL DEBOUNCE
+	POP 00H
+	MOV A, R0
+	MOV P2, A
+	DJNZ R5, PAD
+	
+	
+DAD250:
+		MOV R7, #250 ; move 50 times into R4
+LOOP0:
+		MOV R6, #250 ; move 250 times into R3
+		TEMP0:
+				JNB P1.0, PUSH1
+				JNB P1.4, PAD
+				DJNZ R6, TEMP0
+		MOV R6, #250 ; move 250 times into R3
+		TEMP1:
+				JNB P1.0, PUSH1
+				JNB P1.4, PAD
+				DJNZ R6, TEMP1
+		DJNZ R7, LOOP0 ; delay 25ms
+		RET ; return to main code
+DEBOUNCE:
+		MOV R7, #50 ; move 50 times into R4
+LOOP1:
+		MOV R6, #250 ; move 250 times into R3
+		DJNZ R6, $ ; jump to itself R3 times
+		DJNZ R7, LOOP1 ; delay 25ms
+		RET ; return to main code
+END

@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj" 
+TO ".\Objects\e5a" 
+PRINT(".\Listings\e5a.m51") RAMSIZE(256) 
+CODE( 0X0000-0X1FFF )
