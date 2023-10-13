@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/09/2023 21:22:56 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/11/2023 16:57:25 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -9,13 +9,14 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PR
 LOC  OBJ            LINE     SOURCE
 
 0000                   1     ORG 0
-0000 7464              2     MOV A, #064H
-0002 75F00D            3     MOV B, #00DH
-0005 25F0              4     ADD A, B
-0007 75F006            5     MOV B, #006H
-000A 84                6     DIV AB
-                       7     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/09/2023 21:22:56 PAGE     2
+0000 74BD              2     MOV A, #10111101B
+0002 54EF              3     ANL A, #11101111B
+0004 F5F0              4     MOV B,A
+0006 7442              5     MOV A, #01000010B ; move 01000010B into ACC
+0008 4410              6     ORL A, #00010000B ; use OR Gate to turn Bit 4 into 1
+000A F4                7     CPL A ; use NOT Gate
+                       8     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/11/2023 16:57:25 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------

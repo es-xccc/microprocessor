@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/09/2023  21:22:57  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/11/2023  16:57:25  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -33,9 +33,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\e4b (STARTUP)
   D:00F0H         SYMBOL        B
   C:0000H         LINE#         2
   C:0002H         LINE#         3
-  C:0005H         LINE#         4
-  C:0007H         LINE#         5
-  C:000AH         LINE#         6
+  C:0004H         LINE#         4
+  C:0006H         LINE#         5
+  C:0008H         LINE#         6
+  C:000AH         LINE#         7
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
