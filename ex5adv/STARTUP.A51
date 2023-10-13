@@ -15,7 +15,7 @@ PUSH1:
 		ACALL DEBOUNCE
 		PUSH 00H
 		RET
-PAD:
+POP1:
 		ACALL DEBOUNCE
 		ACALL DEBOUNCE
 		ACALL DEBOUNCE
@@ -35,16 +35,12 @@ PAD:
 DAD250:
 		MOV R7, #250 ; move 50 times into R4
 LOOP0:
-		MOV R6, #250 ; move 250 times into R3
+		MOV R6, #167 ; move 250 times into R3
 		TEMP0:
 				JNB P1.0, PUSH1
 				JNB P1.4, PAD
 				DJNZ R6, TEMP0
 		MOV R6, #250 ; move 250 times into R3
-		TEMP1:
-				JNB P1.0, PUSH1
-				JNB P1.4, PAD
-				DJNZ R6, TEMP1
 		DJNZ R7, LOOP0 ; delay 25ms
 		RET ; return to main code
 DEBOUNCE:
