@@ -1,8 +1,8 @@
 ORG 0000H
+MOV SP, #32H
 JMP RUN ;jump into loop
 ORG 0030H
 RUN:
-		MOV SP, #32H
 		MOV A, #00000011B
 		MOV R0, A
 		MOV P2, A
