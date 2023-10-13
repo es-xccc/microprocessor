@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 13:21:24 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 13:30:23 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -22,26 +22,26 @@ LOC  OBJ            LINE     SOURCE
 003D 1161             12                     ACALL DAD250
 003F 80EF             13                     SJMP RUN
 0041                  14     PUSH1:
-0041 117A             15             ACALL DEBOUNCE
-0043 C000             16             PUSH 00H
-0045 22               17             RET
+0041 117A             15                     ACALL DEBOUNCE
+0043 C000             16                     PUSH 00H
+0045 22               17                     RET
 0046                  18     PAD:
-0046 117A             19             ACALL DEBOUNCE
-0048 117A             20             ACALL DEBOUNCE
-004A 117A             21             ACALL DEBOUNCE
-004C 117A             22             ACALL DEBOUNCE
-004E 117A             23             ACALL DEBOUNCE
-0050 117A             24             ACALL DEBOUNCE
-0052 117A             25             ACALL DEBOUNCE
-0054 117A             26             ACALL DEBOUNCE
-0056 117A             27             ACALL DEBOUNCE
-0058 117A             28             ACALL DEBOUNCE
-005A D000             29             POP 00H
-005C E8               30             MOV A, R0
-005D F5A0             31             MOV P2, A
-005F DDE5             32             DJNZ R5, PAD
-                      33             
-                      34             
+0046 117A             19                     ACALL DEBOUNCE
+0048 117A             20                     ACALL DEBOUNCE
+004A 117A             21                     ACALL DEBOUNCE
+004C 117A             22                     ACALL DEBOUNCE
+004E 117A             23                     ACALL DEBOUNCE
+0050 117A             24                     ACALL DEBOUNCE
+0052 117A             25                     ACALL DEBOUNCE
+0054 117A             26                     ACALL DEBOUNCE
+0056 117A             27                     ACALL DEBOUNCE
+0058 117A             28                     ACALL DEBOUNCE
+005A D000             29                     POP 00H
+005C E8               30                     MOV A, R0
+005D F5A0             31                     MOV P2, A
+005F 8022             32                     SJMP STOP
+                      33     
+                      34     
 0061                  35     DAD250:
 0061 7FFA             36                     MOV R7, #250 ; move 50 times into R4
 0063                  37     LOOP0:
@@ -64,8 +64,12 @@ LOC  OBJ            LINE     SOURCE
 007E DEFE             54                     DJNZ R6, $ ; jump to itself R3 times
 0080 DFFA             55                     DJNZ R7, LOOP1 ; delay 25ms
 0082 22               56                     RET ; return to main code
-                      57     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 13:21:24 PAGE     2
+0083                  57     STOP:
+A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 13:30:23 PAGE     2
+
+0083 80FE             58                     SJMP STOP
+                      59     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 13:30:23 PAGE     3
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -83,6 +87,7 @@ PAD. . . . . . . .  C ADDR   0046H   A
 PUSH1. . . . . . .  C ADDR   0041H   A   
 RUN. . . . . . . .  C ADDR   0030H   A   
 SP . . . . . . . .  D ADDR   0081H   A   
+STOP . . . . . . .  C ADDR   0083H   A   
 TEMP0. . . . . . .  C ADDR   0065H   A   
 TEMP1. . . . . . .  C ADDR   006FH   A   
 
