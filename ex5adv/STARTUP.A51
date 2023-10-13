@@ -15,7 +15,7 @@ PUSH1:
 		ACALL DEBOUNCE
 		PUSH 00H
 		RET
-POP1:
+POPALL:
 		ACALL DEBOUNCE
 		ACALL DEBOUNCE
 		ACALL DEBOUNCE
@@ -29,7 +29,7 @@ POP1:
 		POP 00H
 		MOV A, R0
 		MOV P2, A
-		SJMP STOP
+		SJMP POPALL
 
 
 DAD250:
@@ -38,7 +38,7 @@ LOOP0:
 		MOV R6, #167 ; move 250 times into R3
 		TEMP0:
 				JNB P1.0, PUSH1
-				JNB P1.4, PAD
+				JNB P1.4, POPALL
 				DJNZ R6, TEMP0
 		MOV R6, #250 ; move 250 times into R3
 		DJNZ R7, LOOP0 ; delay 25ms
@@ -50,6 +50,4 @@ LOOP1:
 		DJNZ R6, $ ; jump to itself R3 times
 		DJNZ R7, LOOP1 ; delay 25ms
 		RET ; return to main code
-STOP:
-		SJMP STOP
 END
