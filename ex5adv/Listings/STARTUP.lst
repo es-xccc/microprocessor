@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 22:32:14 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 23:16:48 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -11,47 +11,54 @@ LOC  OBJ            LINE     SOURCE
 0000                   1     ORG 0x00
 0000 802E              2     SJMP SETUP
 0030                   3     ORG 0X30
-0030 747E              4     SETUP: MOV A, #0x7E
-0032 758130            5     MOV SP, #0X30
-0035 7F00              6     MOV R7, #0X00
-0037 8000              7     SJMP MAIN
-0039 23                8     MAIN: RL A
-003A F5A0              9     MOV P2, A
-003C 7E00             10     MOV R6, #0X00
-003E 1145             11     CALL POLLING
-0040 BE0021           12     CJNE R6, #0X00, ISPRESSED
-0043 80F4             13     SJMP MAIN
-0045 7805             14     POLLING: MOV R0, #5
-0047 7996             15     POLLING1: MOV R1, #150
-0049 7ADC             16     POLLING2: MOV R2, #220
-004B D290             17     SETB P1.0
-004D D294             18     SETB P1.4
-004F 30900A           19     JNB P1.0, PUSHSET
-0052 30940B           20     JNB P1.4, POPSET
-0055 DAFE             21     DJNZ R2, $
-0057 D9F0             22     DJNZ R1, POLLING2
-0059 D8EC             23     DJNZ R0, POLLING1
-005B 22               24     RET
-005C 7E01             25     PUSHSET: MOV R6, #0X01
-005E 80E9             26     SJMP POLLING2
-0060 7E02             27     POPSET: MOV R6, #0X02
-0062 80E5             28     SJMP POLLING2
-0064 BE0112           29     ISPRESSED: CJNE R6, #0X01, POPOUT
-0067 C0A0             30     PUSH 0XA0
-0069 0F               31     INC R7
-006A 80CD             32     SJMP MAIN
-006C 7805             33     DELAY: MOV R0, #5
-006E 79C8             34     DELAY1: MOV R1, #200
-0070 7AFA             35     DELAY2: MOV R2, #250
-0072 DAFE             36     DJNZ R2, $
-0074 D9FA             37     DJNZ R1, DELAY2
-0076 D8F6             38     DJNZ R0, DELAY1
-0078 22               39     RET
-0079 D0A0             40     POPOUT: POP 0XA0
-007B 116C             41     CALL DELAY
-007D DFFA             42     DJNZ R7, POPOUT
-                      43     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 22:32:14 PAGE     2
+0030 747E              4     SETUP:  MOV A, #0x7E
+0032 758130            5                     MOV SP, #0X30
+0035 7F00              6                     MOV R7, #0X00
+0037 8000              7                     SJMP MAIN
+                       8                     
+0039 23                9     MAIN:   RL A
+003A F5A0             10                     MOV P2, A
+003C 7E00             11                     MOV R6, #0X00
+003E 1145             12                     CALL POLLING
+0040 BE0021           13                     CJNE R6, #0X00, ISPRESSED
+0043 80F4             14                     SJMP MAIN
+                      15                     
+0045 7805             16     POLLING: MOV R0, #5
+0047 7996             17     POLLING1: MOV R1, #150
+0049 7ADC             18     POLLING2: MOV R2, #220
+004B D290             19                     SETB P1.0
+004D D294             20                     SETB P1.4
+004F 30900A           21                     JNB P1.0, PUSHSET
+0052 30940B           22                     JNB P1.4, POPSET
+0055 DAFE             23                     DJNZ R2, $
+0057 D9F0             24                     DJNZ R1, POLLING2
+0059 D8EC             25                     DJNZ R0, POLLING1
+005B 22               26                     RET
+                      27                     
+005C 7E01             28     PUSHSET: MOV R6, #0X01
+005E 80E9             29                     SJMP POLLING2
+                      30                     
+0060 7E02             31     POPSET: MOV R6, #0X02
+0062 80E5             32                     SJMP POLLING2
+                      33                     
+0064 BE0112           34     ISPRESSED: CJNE R6, #0X01, POPOUT
+0067 C0A0             35                     PUSH 0XA0
+0069 0F               36                     INC R7
+006A 80CD             37                     SJMP MAIN
+                      38                     
+006C 7805             39     DELAY: MOV R0, #5
+006E 79C8             40     DELAY1: MOV R1, #200
+0070 7AFA             41     DELAY2: MOV R2, #250
+0072 DAFE             42                     DJNZ R2, $
+0074 D9FA             43                     DJNZ R1, DELAY2
+0076 D8F6             44                     DJNZ R0, DELAY1
+0078 22               45                     RET
+                      46                     
+0079 D0A0             47     POPOUT: POP 0XA0
+007B 116C             48                     CALL DELAY
+007D DFFA             49                     DJNZ R7, POPOUT
+                      50     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/13/2023 23:16:48 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
