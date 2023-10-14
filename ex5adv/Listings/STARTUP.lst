@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 10:37:38 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 22:59:31 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -34,7 +34,7 @@ LOC  OBJ            LINE     SOURCE
 004C                  24     PUSH1:
 004C 1155             25                     ACALL DELAY125
 004E 1155             26                     ACALL DELAY125
-0050 C000             27                     PUSH 00H
+0050 C0A0             27                     PUSH 0A0H
 0052 0D               28                     INC R5
 0053 80E9             29                     SJMP CONT
 0055                  30     DELAY125:
@@ -49,12 +49,10 @@ LOC  OBJ            LINE     SOURCE
 0060 1155             39                     ACALL DELAY125
 0062 1155             40                     ACALL DELAY125
 0064 1155             41                     ACALL DELAY125
-0066 D000             42                     POP 00H
-0068 E8               43                     MOV A, R0
-0069 F5A0             44                     MOV P2, A
-006B DDF1             45                     DJNZ R5, POPALL
-                      46     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 10:37:38 PAGE     2
+0066 D0A0             42                     POP 0A0H
+0068 DDF4             43                     DJNZ R5, POPALL
+                      44     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 22:59:31 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------

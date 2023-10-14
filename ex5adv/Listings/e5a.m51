@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/14/2023  10:37:38  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/14/2023  22:59:31  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\e5a (STARTUP)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     006DH     ABSOLUTE     
+            CODE    0000H     006AH     ABSOLUTE     
 
 
 
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\e5a (STARTUP)
   C:0049H         LINE#         22
   C:004AH         LINE#         23
   C:004CH         LINE#         25
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/14/2023  10:37:38  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/14/2023  22:59:31  PAGE 2
 
 
   C:004EH         LINE#         26
@@ -77,13 +77,11 @@ SYMBOL TABLE OF MODULE:  .\Objects\e5a (STARTUP)
   C:0064H         LINE#         41
   C:0066H         LINE#         42
   C:0068H         LINE#         43
-  C:0069H         LINE#         44
-  C:006BH         LINE#         45
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0046H BYTE ( 3%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0043H BYTE ( 3%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=109
+Program Size: data=8.0 xdata=0 code=106
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
