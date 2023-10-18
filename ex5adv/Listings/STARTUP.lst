@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 22:59:31 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/18/2023 17:29:23 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -18,41 +18,40 @@ LOC  OBJ            LINE     SOURCE
 0030 7FFA              8                     MOV R7, #250
 0032                   9     RUN:
 0032 7EFA             10                     MOV R6, #250
-0034 F8               11                     MOV R0, A
-0035 F5A0             12                     MOV P2, A
-0037 D290             13                     SETB P1.0
-0039 D294             14                     SETB P1.4
-003B 30900E           15                     JNB P1.0, PUSH1
-003E                  16     CONT:
-003E 30941D           17                     JNB P1.4, POPALL
-0041 DEFE             18                     DJNZ R6, $
-0043 7EFA             19                     MOV R6, #250
-0045 DEFE             20                     DJNZ R6, $
-0047 DFE9             21                     DJNZ R7, RUN
-0049 23               22                     RL A
-004A 80E4             23                     SJMP RUN0
-004C                  24     PUSH1:
-004C 1155             25                     ACALL DELAY125
-004E 1155             26                     ACALL DELAY125
-0050 C0A0             27                     PUSH 0A0H
-0052 0D               28                     INC R5
-0053 80E9             29                     SJMP CONT
-0055                  30     DELAY125:
-0055 7FFA             31                     MOV R7, #250 ; move 50 times into R4
-0057                  32     LOOP1:
-0057 7EFA             33                     MOV R6, #250 ; move 250 times into R3
-0059 DEFE             34                     DJNZ R6, $ ; jump to itself R3 times
-005B DFFA             35                     DJNZ R7, LOOP1 ; delay 25ms
-005D 22               36                     RET ; return to main code
-005E                  37     POPALL:
-005E 1155             38                     ACALL DELAY125
-0060 1155             39                     ACALL DELAY125
-0062 1155             40                     ACALL DELAY125
-0064 1155             41                     ACALL DELAY125
-0066 D0A0             42                     POP 0A0H
-0068 DDF4             43                     DJNZ R5, POPALL
-                      44     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/14/2023 22:59:31 PAGE     2
+0034 F5A0             11                     MOV P2, A
+0036 D290             12                     SETB P1.0
+0038 D294             13                     SETB P1.4
+003A 30900E           14                     JNB P1.0, PUSH1
+003D                  15     CONT:
+003D 30941D           16                     JNB P1.4, POPALL
+0040 DEFE             17                     DJNZ R6, $
+0042 7EFA             18                     MOV R6, #250
+0044 DEFE             19                     DJNZ R6, $
+0046 DFEA             20                     DJNZ R7, RUN
+0048 23               21                     RL A
+0049 80E5             22                     SJMP RUN0
+004B                  23     PUSH1:
+004B 1154             24                     ACALL DELAY125
+004D 1154             25                     ACALL DELAY125
+004F C0A0             26                     PUSH 0A0H
+0051 0D               27                     INC R5
+0052 80E9             28                     SJMP CONT
+0054                  29     DELAY125:
+0054 7FFA             30                     MOV R7, #250 ; move 50 times into R4
+0056                  31     LOOP1:
+0056 7EFA             32                     MOV R6, #250 ; move 250 times into R3
+0058 DEFE             33                     DJNZ R6, $ ; jump to itself R3 times
+005A DFFA             34                     DJNZ R7, LOOP1 ; delay 25ms
+005C 22               35                     RET ; return to main code
+005D                  36     POPALL:
+005D 1154             37                     ACALL DELAY125
+005F 1154             38                     ACALL DELAY125
+0061 1154             39                     ACALL DELAY125
+0063 1154             40                     ACALL DELAY125
+0065 D0A0             41                     POP 0A0H
+0067 DDF4             42                     DJNZ R5, POPALL
+                      43     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/18/2023 17:29:23 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -60,13 +59,13 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-CONT . . . . . . .  C ADDR   003EH   A   
-DELAY125 . . . . .  C ADDR   0055H   A   
-LOOP1. . . . . . .  C ADDR   0057H   A   
+CONT . . . . . . .  C ADDR   003DH   A   
+DELAY125 . . . . .  C ADDR   0054H   A   
+LOOP1. . . . . . .  C ADDR   0056H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 P2 . . . . . . . .  D ADDR   00A0H   A   
-POPALL . . . . . .  C ADDR   005EH   A   
-PUSH1. . . . . . .  C ADDR   004CH   A   
+POPALL . . . . . .  C ADDR   005DH   A   
+PUSH1. . . . . . .  C ADDR   004BH   A   
 RUN. . . . . . . .  C ADDR   0032H   A   
 RUN0 . . . . . . .  C ADDR   0030H   A   
 SP . . . . . . . .  D ADDR   0081H   A   

@@ -8,7 +8,6 @@ RUN0:
 		MOV R7, #250
 RUN:
 		MOV R6, #250
-		MOV R0, A
 		MOV P2, A
 		SETB P1.0
 		SETB P1.4

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/14/2023  22:59:31  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/18/2023  17:29:23  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\e5a (STARTUP)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     006AH     ABSOLUTE     
+            CODE    0000H     0069H     ABSOLUTE     
 
 
 
@@ -30,13 +30,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\e5a (STARTUP)
   ----------------------------------
 
   -------         MODULE        STARTUP
-  C:003EH         SYMBOL        CONT
-  C:0055H         SYMBOL        DELAY125
-  C:0057H         SYMBOL        LOOP1
+  C:003DH         SYMBOL        CONT
+  C:0054H         SYMBOL        DELAY125
+  C:0056H         SYMBOL        LOOP1
   D:0090H         SYMBOL        P1
   D:00A0H         SYMBOL        P2
-  C:005EH         SYMBOL        POPALL
-  C:004CH         SYMBOL        PUSH1
+  C:005DH         SYMBOL        POPALL
+  C:004BH         SYMBOL        PUSH1
   C:0032H         SYMBOL        RUN
   C:0030H         SYMBOL        RUN0
   D:0081H         SYMBOL        SP
@@ -47,41 +47,40 @@ SYMBOL TABLE OF MODULE:  .\Objects\e5a (STARTUP)
   C:0030H         LINE#         8
   C:0032H         LINE#         10
   C:0034H         LINE#         11
-  C:0035H         LINE#         12
-  C:0037H         LINE#         13
-  C:0039H         LINE#         14
-  C:003BH         LINE#         15
-  C:003EH         LINE#         17
-  C:0041H         LINE#         18
-  C:0043H         LINE#         19
-  C:0045H         LINE#         20
-  C:0047H         LINE#         21
+  C:0036H         LINE#         12
+  C:0038H         LINE#         13
+  C:003AH         LINE#         14
+  C:003DH         LINE#         16
+  C:0040H         LINE#         17
+  C:0042H         LINE#         18
+  C:0044H         LINE#         19
+  C:0046H         LINE#         20
+  C:0048H         LINE#         21
   C:0049H         LINE#         22
-  C:004AH         LINE#         23
-  C:004CH         LINE#         25
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/14/2023  22:59:31  PAGE 2
+  C:004BH         LINE#         24
+  C:004DH         LINE#         25
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/18/2023  17:29:23  PAGE 2
 
 
-  C:004EH         LINE#         26
-  C:0050H         LINE#         27
+  C:004FH         LINE#         26
+  C:0051H         LINE#         27
   C:0052H         LINE#         28
-  C:0053H         LINE#         29
-  C:0055H         LINE#         31
-  C:0057H         LINE#         33
-  C:0059H         LINE#         34
-  C:005BH         LINE#         35
-  C:005DH         LINE#         36
-  C:005EH         LINE#         38
-  C:0060H         LINE#         39
-  C:0062H         LINE#         40
-  C:0064H         LINE#         41
-  C:0066H         LINE#         42
-  C:0068H         LINE#         43
+  C:0054H         LINE#         30
+  C:0056H         LINE#         32
+  C:0058H         LINE#         33
+  C:005AH         LINE#         34
+  C:005CH         LINE#         35
+  C:005DH         LINE#         37
+  C:005FH         LINE#         38
+  C:0061H         LINE#         39
+  C:0063H         LINE#         40
+  C:0065H         LINE#         41
+  C:0067H         LINE#         42
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0043H BYTE ( 3%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0042H BYTE ( 3%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=106
+Program Size: data=8.0 xdata=0 code=105
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
