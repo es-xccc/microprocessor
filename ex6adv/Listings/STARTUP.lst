@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  STARTUP                                                              10/23/2023 00:13:18 PAGE     1
+A51 MACRO ASSEMBLER  STARTUP                                                              10/23/2023 09:11:17 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -8,61 +8,62 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PR
 
 LOC  OBJ            LINE     SOURCE
 
-0000                   1     ORG 00H ;code start from 00H
+0000                   1     ORG 0000H ;code start from 00H
 0000 802E              2     SJMP MAIN ;jump to MAIN
-0003                   3     ORG 03H ;vector address for INT0
-0003 803C              4     SJMP INT0_ISR ;jump to INT0_ISR
-0013                   5     ORG 13H ;vector address for INT0
-0013 8042              6     SJMP INT1_ISR ;jump to INT0_ISR
-0030                   7     ORG 030H ;after vector table space
+0003                   3     ORG 0003H ;vector address for INT0
+0003 803F              4     SJMP INT0_ISR ;jump to INT0_ISR
+0013                   5     ORG 0013H ;vector address for INT0
+0013 8045              6     SJMP INT1_ISR ;jump to INT0_ISR
+0030                   7     ORG 0030H ;after vector table space
 0030                   8     MAIN:
-0030 8585A8            9                     MOV IE, 10000101B ;enable EA and EX0
-0033 D2BA             10                     SETB PX1
-                      11                     ;MOV IP, 00000100B      *****error*****
-0035 853081           12                     MOV SP,30H ;stack start from #30H
-0038 E500             13                     MOV A,00000000B ;set ACC as 0000000B
-003A                  14     LOOP:
-003A F5A0             15                     MOV P2,A ;P1 A (LED output)
-003C 116D             16                     CALL DELAY ;call delay function
-003E F4               17                     CPL A ;reverse A
-003F 80F9             18                     SJMP LOOP ;infinite loop
-0041                  19     INT0_ISR:
-0041 C0D0             20                     PUSH PSW ;push PSW into stack
-0043 C0E0             21                     PUSH ACC ;push ACC into stack
-0045 D2D3             22                     SETB RS0 ;switch to RB1
-0047 74F0             23                     MOV A,#11110000B ;set ACC as 11111110B
-0049 7818             24                     MOV     R0,#24                  ;loop counter 24 (8*3)
-004B                  25     ROTATE_L:
-004B F5A0             26                     MOV P2,A                        ;P2 A (LED output)
-004D 116D             27                     CALL DELAY                      ;call delay function
-004F 23               28                     RL A                            ;rotate left
-0050 D8F9             29                     DJNZ R0,ROTATE_L        ;loop until R0 is 0
-0052 D0E0             30                     POP ACC                         ;pop out ACC from stac
-0054 D0D0             31                     POP PSW                         ;pop out PSW from stack
-0056 32               32                     RETI                            ;return from ISR
-0057                  33     INT1_ISR:
-0057 C0D0             34                     PUSH PSW ;push PSW into stack
-0059 C0E0             35                     PUSH ACC ;push ACC into stack
-005B D2D3             36                     SETB RS0 ;switch to RB1
-005D 74FE             37                     MOV A,#11111110B ;set ACC as 11111110B
-005F 7910             38                     MOV     R1,#16                  ;loop counter 24 (8*3)
-0061                  39     ROTATE_L1:
-0061 F5A0             40                     MOV P2,A                        ;P2 A (LED output)
-0063 116D             41                     CALL DELAY                      ;call delay function
-0065 23               42                     RL A                            ;rotate left
-0066 D9F9             43                     DJNZ R1,ROTATE_L1       ;loop until R0 is 0
-0068 D0E0             44                     POP ACC                         ;pop out ACC from stac
-006A D0D0             45                     POP PSW                         ;pop out PSW from stack
-006C 32               46                     RETI 
-006D                  47     DELAY:
-006D 7FC8             48                     MOV R7,#200
-006F                  49     D1:
-006F 7EFA             50                     MOV R6,#250
-0071 DEFE             51                     DJNZ R6,$
-0073 DFFA             52                     DJNZ R7,D1
-0075 22               53                     RET
-                      54     END
-A51 MACRO ASSEMBLER  STARTUP                                                              10/23/2023 00:13:18 PAGE     2
+0030 D2AF              9                     SETB EA
+0032 D2A8             10                     SETB EX0
+0034 D2AA             11                     SETB EX1
+0036 D2BA             12                     SETB PX1
+0038 758130           13                     MOV SP, #30H ;stack start from #30H
+003B 7400             14                     MOV A, #00000000B ;set ACC as 0000000B
+003D                  15     LOOP:
+003D F5A0             16                     MOV P2, A ;P1 A (LED output)
+003F 1170             17                     ACALL DELAY100 ;call delay function
+0041 F4               18                     CPL A ;reverse A
+0042 80F9             19                     SJMP LOOP ;infinite loop
+0044                  20     INT0_ISR:
+0044 C0D0             21                     PUSH PSW ;push PSW into stack
+0046 C0E0             22                     PUSH ACC ;push ACC into stack
+0048 D2D3             23                     SETB RS0 ;switch to RB1
+004A 74F0             24                     MOV A, #11110000B ;set ACC as 11111110B
+004C 7818             25                     MOV     R0, #24                         ;loop counter 24 (8*3)
+004E                  26     ROTATE_L:
+004E F5A0             27                     MOV P2, A                       ;P2 A (LED output)
+0050 1170             28                     ACALL DELAY100                  ;call delay function
+0052 23               29                     RL A                            ;rotate left
+0053 D8F9             30                     DJNZ R0,ROTATE_L        ;loop until R0 is 0
+0055 D0E0             31                     POP ACC                         ;pop out ACC from stac
+0057 D0D0             32                     POP PSW                         ;pop out PSW from stack
+0059 32               33                     RETI                            ;return from ISR
+005A                  34     INT1_ISR:
+005A C0D0             35                     PUSH PSW ;push PSW into stack
+005C C0E0             36                     PUSH ACC ;push ACC into stack
+005E D2D3             37                     SETB RS0 ;switch to RB1
+0060 74FE             38                     MOV A, #11111110B ;set ACC as 11111110B
+0062 7910             39                     MOV     R1, #16                         ;loop counter 24 (8*3)
+0064                  40     ROTATE_L1:
+0064 F5A0             41                     MOV P2, A                       ;P2 A (LED output)
+0066 1170             42                     ACALL DELAY100                  ;call delay function
+0068 23               43                     RL A                            ;rotate left
+0069 D9F9             44                     DJNZ R1, ROTATE_L1      ;loop until R0 is 0
+006B D0E0             45                     POP ACC                         ;pop out ACC from stac
+006D D0D0             46                     POP PSW                         ;pop out PSW from stack
+006F 32               47                     RETI 
+0070                  48     DELAY100:
+0070 7FC8             49                     MOV R7, #200
+0072                  50     D1:
+0072 7EFA             51                     MOV R6, #250
+0074 DEFE             52                     DJNZ R6, $
+0076 DFFA             53                     DJNZ R7, D1
+0078 22               54                     RET
+                      55     END
+A51 MACRO ASSEMBLER  STARTUP                                                              10/23/2023 09:11:17 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -71,18 +72,20 @@ SYMBOL TABLE LISTING
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
 ACC. . . . . . . .  D ADDR   00E0H   A   
-D1 . . . . . . . .  C ADDR   006FH   A   
-DELAY. . . . . . .  C ADDR   006DH   A   
-IE . . . . . . . .  D ADDR   00A8H   A   
-INT0_ISR . . . . .  C ADDR   0041H   A   
-INT1_ISR . . . . .  C ADDR   0057H   A   
-LOOP . . . . . . .  C ADDR   003AH   A   
+D1 . . . . . . . .  C ADDR   0072H   A   
+DELAY100 . . . . .  C ADDR   0070H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+INT0_ISR . . . . .  C ADDR   0044H   A   
+INT1_ISR . . . . .  C ADDR   005AH   A   
+LOOP . . . . . . .  C ADDR   003DH   A   
 MAIN . . . . . . .  C ADDR   0030H   A   
 P2 . . . . . . . .  D ADDR   00A0H   A   
 PSW. . . . . . . .  D ADDR   00D0H   A   
 PX1. . . . . . . .  B ADDR   00B8H.2 A   
-ROTATE_L . . . . .  C ADDR   004BH   A   
-ROTATE_L1. . . . .  C ADDR   0061H   A   
+ROTATE_L . . . . .  C ADDR   004EH   A   
+ROTATE_L1. . . . .  C ADDR   0064H   A   
 RS0. . . . . . . .  B ADDR   00D0H.3 A   
 SP . . . . . . . .  D ADDR   0081H   A   
 
