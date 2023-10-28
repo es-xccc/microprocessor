@@ -4,6 +4,7 @@ ORG	0x03
 JMP	INT0_ISR
 ORG	0x30
 INIT:
+		SETB P3.2
 		MOV	IE, #0x81	
 		MOV	SP, #0x31
 		SETB IT0
@@ -183,7 +184,7 @@ DISPLAY:		MOV	DPTR, #DP_table
 				MOVC	A, @A+DPTR		
 				MOV	P1, A				
 				CALL	DEL_300_US		
-				SETB	P3.7	
+				SETB	P3.7
 				RET 					
 
 DEL_300_US:		MOV	R7, #164			
@@ -191,6 +192,7 @@ DEL_300_US:		MOV	R7, #164
 			RET
 
 INT0_ISR:		SETB	RS0					
+				SETB P3.2
 COUNTDOWN:		CALL	SET_DEGITS			
 				MOV	R5, #10					
 				CALL	SHOW				
@@ -217,7 +219,7 @@ SHOW1:			CALL	DISPLAY
 KB_table:		DB		01H		
 				DB		02H		
 				DB		03H		
-				DB		0CH		
+				DB		0AH		
 				DB		04H		
 				DB		05H		
 				DB		06H		
@@ -226,20 +228,21 @@ KB_table:		DB		01H
 				DB		08H		
 				DB		09H		
 				DB		0CH		
-				DB		0FH		
-				DB		00H		
 				DB		0EH		
+				DB		00H		
+				DB		0FH		
 				DB		0DH		
 				
-DP_table:		DB		11000000B //0
-				DB		11111001B
-				DB		10100100B
-				DB		10110000B
-				DB		10011001B 
-				DB		10010010B 
-				DB		10000010B
-				DB		11011000B
-				DB		10000000B
-				DB		10010000B
-					
-				END
+DP_table:
+		DB 00000011B ; 0
+		DB 10011111B ; display "1"
+		DB 00100101B ; display "2"
+		DB 00001101B ; display "3"
+		DB 10011001B ; display "4"
+		DB 01001001B ; display "5"
+		DB 01000001B ; display "6"
+		DB 00011011B ; display "7"
+		DB 00000001B ; display "8"
+		DB 00011001B ; display "9"
+		
+END

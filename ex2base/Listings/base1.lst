@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  BASE1                                                                10/28/2023 11:06:34 PAGE     1
+A51 MACRO ASSEMBLER  BASE1                                                                10/28/2023 18:34:37 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -9,23 +9,26 @@ ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE base1.A51 SET(SMALL) DEBUG PRIN
 LOC  OBJ            LINE     SOURCE
 
 0030                   1     ORG 0030H
-0030 7400              2     MOV A, #0
+0030 7400              2     MOV A, #00000000B
 0032 F590              3     MOV P1, A
-0034                   4     START:
-0034 7904              5                     MOV R1, #4
-0036 7480              6                     MOV A, #10000000B
-0038                   7     LOOP:   
-0038 F5B0              8                     MOV P3, A
-003A 03                9                     RR A
-003B 1141             10                     CALL DELAY
-003D D9F9             11                     DJNZ R1, LOOP
-003F 80F3             12                     SJMP START
-0041                  13     DELAY:
-0041 7BFA             14                     MOV R3, #250
-0043 DBFE             15                     DJNZ R3, $
-0045 22               16                     RET
-                      17     END
-A51 MACRO ASSEMBLER  BASE1                                                                10/28/2023 11:06:34 PAGE     2
+0034 74FE              4     MOV A, #11111110B
+0036                   5     START:
+0036 F5B0              6                     MOV P3, A
+0038 113F              7                     CALL DELAY
+003A 113F              8                     CALL DELAY
+003C 03                9                     RR A
+003D 80F7             10                     SJMP START
+003F                  11     DELAY:
+003F 7BFA             12                     MOV R3, #250
+0041                  13     LOOP1:
+0041 7CFA             14                     MOV R4, #250
+0043 DCFE             15                     DJNZ R4, $
+0045 7CFA             16                     MOV R4, #250
+0047 DCFE             17                     DJNZ R4, $
+0049 DBF6             18                     DJNZ R3, LOOP1
+004B 22               19                     RET
+                      20     END
+A51 MACRO ASSEMBLER  BASE1                                                                10/28/2023 18:34:37 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -33,11 +36,11 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-DELAY. . . . . . .  C ADDR   0041H   A   
-LOOP . . . . . . .  C ADDR   0038H   A   
+DELAY. . . . . . .  C ADDR   003FH   A   
+LOOP1. . . . . . .  C ADDR   0041H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 P3 . . . . . . . .  D ADDR   00B0H   A   
-START. . . . . . .  C ADDR   0034H   A   
+START. . . . . . .  C ADDR   0036H   A   
 
 
 REGISTER BANK(S) USED: 0 

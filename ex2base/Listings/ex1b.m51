@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/28/2023  11:06:34  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/28/2023  18:34:37  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\ex1b (BASE1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0046H     ABSOLUTE     
+            CODE    0000H     004CH     ABSOLUTE     
 
 
 
@@ -30,28 +30,31 @@ SYMBOL TABLE OF MODULE:  .\Objects\ex1b (BASE1)
   ----------------------------------
 
   -------         MODULE        BASE1
-  C:0041H         SYMBOL        DELAY
-  C:0038H         SYMBOL        LOOP
+  C:003FH         SYMBOL        DELAY
+  C:0041H         SYMBOL        LOOP1
   D:0090H         SYMBOL        P1
   D:00B0H         SYMBOL        P3
-  C:0034H         SYMBOL        START
+  C:0036H         SYMBOL        START
   C:0030H         LINE#         2
   C:0032H         LINE#         3
-  C:0034H         LINE#         5
+  C:0034H         LINE#         4
   C:0036H         LINE#         6
-  C:0038H         LINE#         8
-  C:003AH         LINE#         9
-  C:003BH         LINE#         10
-  C:003DH         LINE#         11
+  C:0038H         LINE#         7
+  C:003AH         LINE#         8
+  C:003CH         LINE#         9
+  C:003DH         LINE#         10
   C:003FH         LINE#         12
   C:0041H         LINE#         14
   C:0043H         LINE#         15
   C:0045H         LINE#         16
+  C:0047H         LINE#         17
+  C:0049H         LINE#         18
+  C:004BH         LINE#         19
   -------         ENDMOD        BASE1
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0016H BYTE ( 1%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001CH BYTE ( 1%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=70
+Program Size: data=8.0 xdata=0 code=76
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
