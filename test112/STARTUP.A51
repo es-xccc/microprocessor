@@ -4,7 +4,7 @@ ORG	0x03
 JMP	INT0_ISR
 ORG	0x30
 INIT:
-		SETB P3.2
+		
 		MOV	IE, #0x81	
 		MOV	SP, #0x31
 		SETB IT0
@@ -192,7 +192,7 @@ DEL_300_US:		MOV	R7, #164
 			RET
 
 INT0_ISR:		SETB	RS0					
-				SETB P3.2
+				
 COUNTDOWN:		CALL	SET_DEGITS			
 				MOV	R5, #10					
 				CALL	SHOW				
