@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/28/2023  20:13:28  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/29/2023  16:30:48  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\t12 (STARTUP)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     01A1H     ABSOLUTE     
+            CODE    0000H     01A4H     ABSOLUTE     
 
 
 
@@ -39,13 +39,13 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:012EH         SYMBOL        DEL_500_US
   C:0137H         SYMBOL        DISPLAY
   C:0125H         SYMBOL        DIV_CAL
-  C:0197H         SYMBOL        DP_TABLE
+  C:019AH         SYMBOL        DP_TABLE
   C:00C1H         SYMBOL        EQUAL
   D:00A8H         SYMBOL        IE
   C:0030H         SYMBOL        INIT
   C:0160H         SYMBOL        INT0_ISR
   B:0088H.0       SYMBOL        IT0
-  C:0187H         SYMBOL        KB_TABLE
+  C:018AH         SYMBOL        KB_TABLE
   C:006EH         SYMBOL        KEY_IN
   C:006AH         SYMBOL        KEY_OUT
   C:0095H         SYMBOL        L_BRACKETS
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:0093H         SYMBOL        NEXT6
   C:00B3H         SYMBOL        OP_IN
   D:0090H         SYMBOL        P1
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/28/2023  20:13:28  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  16:30:48  PAGE 2
 
 
   D:00A0H         SYMBOL        P2
@@ -69,11 +69,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:009FH         SYMBOL        R_BRACKETS
   C:00D0H         SYMBOL        SAVE_IN
   C:004EH         SYMBOL        SCAN
-  C:016FH         SYMBOL        SET_DEGITS
-  C:017EH         SYMBOL        SHOW
-  C:0180H         SYMBOL        SHOW1
+  C:0172H         SYMBOL        SET_DEGITS
+  C:0181H         SYMBOL        SHOW
+  C:0183H         SYMBOL        SHOW1
   C:00F6H         SYMBOL        SKIP_REFRESH
   D:0081H         SYMBOL        SP
+  C:016EH         SYMBOL        STOP1
   C:0114H         SYMBOL        SUB_CAL
   C:0000H         LINE#         2
   C:0003H         LINE#         4
@@ -118,10 +119,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:007DH         LINE#         50
   C:007FH         LINE#         52
   C:0082H         LINE#         53
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  16:30:48  PAGE 3
+
+
   C:0084H         LINE#         55
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/28/2023  20:13:28  PAGE 3
-
-
   C:0087H         LINE#         56
   C:0089H         LINE#         58
   C:008CH         LINE#         59
@@ -178,10 +179,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:00EAH         LINE#         118
   C:00ECH         LINE#         119
   C:00EDH         LINE#         120
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  16:30:48  PAGE 4
+
+
   C:00F0H         LINE#         121
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/28/2023  20:13:28  PAGE 4
-
-
   C:00F2H         LINE#         122
   C:00F4H         LINE#         123
   C:00F6H         LINE#         125
@@ -238,10 +239,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:0150H         LINE#         182
   C:0152H         LINE#         183
   C:0153H         LINE#         184
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  16:30:48  PAGE 5
+
+
   C:0154H         LINE#         185
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/28/2023  20:13:28  PAGE 5
-
-
   C:0156H         LINE#         186
   C:0158H         LINE#         187
   C:015AH         LINE#         188
@@ -256,25 +257,26 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:016AH         LINE#         199
   C:016CH         LINE#         200
   C:016EH         LINE#         201
-  C:016FH         LINE#         203
-  C:0170H         LINE#         204
+  C:0170H         LINE#         202
+  C:0172H         LINE#         204
   C:0173H         LINE#         205
-  C:0174H         LINE#         206
-  C:0176H         LINE#         207
+  C:0176H         LINE#         206
+  C:0177H         LINE#         207
   C:0179H         LINE#         208
-  C:017AH         LINE#         209
-  C:017CH         LINE#         210
-  C:017DH         LINE#         211
-  C:017EH         LINE#         213
-  C:0180H         LINE#         214
-  C:0182H         LINE#         215
-  C:0184H         LINE#         216
-  C:0186H         LINE#         217
+  C:017CH         LINE#         209
+  C:017DH         LINE#         210
+  C:017FH         LINE#         211
+  C:0180H         LINE#         212
+  C:0181H         LINE#         214
+  C:0183H         LINE#         215
+  C:0185H         LINE#         216
+  C:0187H         LINE#         217
+  C:0189H         LINE#         218
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0175H BYTE (18%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0178H BYTE (18%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=417
+Program Size: data=8.0 xdata=0 code=420
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
