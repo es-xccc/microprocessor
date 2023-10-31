@@ -166,7 +166,13 @@ DEL_500_US:		MOV	R7, #250
 				RET 						
 				
 DISPLAY:		MOV	DPTR, #DP_table		
-				SETB	RS0				
+				SETB	RS0
+				CLR	P3.4 					
+				MOV	A, #0				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A
+				CALL	DEL_300_US
+				SETB	P3.4
 				CLR	P3.5 				
 				MOV	A, R0				
 				MOVC	A, @A+DPTR		

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/29/2023  17:52:00  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                    10/31/2023  17:49:00  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.4.0, INVOKED BY:
@@ -20,7 +20,7 @@ LINK MAP OF MODULE:  .\Objects\t12 (STARTUP)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     01A0H     ABSOLUTE     
+            CODE    0000H     01ABH     ABSOLUTE     
 
 
 
@@ -32,20 +32,20 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   -------         MODULE        STARTUP
   D:00F0H         SYMBOL        B
   C:0106H         SYMBOL        CAL
-  C:0160H         SYMBOL        COUNTDOWN
+  C:016BH         SYMBOL        COUNTDOWN
   C:0128H         SYMBOL        DEBOUNCE
   C:012AH         SYMBOL        DEL_100_MS
-  C:0159H         SYMBOL        DEL_300_US
+  C:0164H         SYMBOL        DEL_300_US
   C:012CH         SYMBOL        DEL_500_US
   C:0135H         SYMBOL        DISPLAY
   C:0123H         SYMBOL        DIV_CAL
-  C:0196H         SYMBOL        DP_TABLE
+  C:01A1H         SYMBOL        DP_TABLE
   C:00BFH         SYMBOL        EQUAL
   D:00A8H         SYMBOL        IE
   C:0030H         SYMBOL        INIT
-  C:015EH         SYMBOL        INT0_ISR
+  C:0169H         SYMBOL        INT0_ISR
   B:0088H.0       SYMBOL        IT0
-  C:0186H         SYMBOL        KB_TABLE
+  C:0191H         SYMBOL        KB_TABLE
   C:006CH         SYMBOL        KEY_IN
   C:0068H         SYMBOL        KEY_OUT
   C:0093H         SYMBOL        L_BRACKETS
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:0091H         SYMBOL        NEXT6
   C:00B1H         SYMBOL        OP_IN
   D:0090H         SYMBOL        P1
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  17:52:00  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/31/2023  17:49:00  PAGE 2
 
 
   D:00A0H         SYMBOL        P2
@@ -69,12 +69,12 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:009DH         SYMBOL        R_BRACKETS
   C:00CEH         SYMBOL        SAVE_IN
   C:004CH         SYMBOL        SCAN
-  C:016EH         SYMBOL        SET_DEGITS
-  C:017DH         SYMBOL        SHOW
-  C:017FH         SYMBOL        SHOW1
+  C:0179H         SYMBOL        SET_DEGITS
+  C:0188H         SYMBOL        SHOW
+  C:018AH         SYMBOL        SHOW1
   C:00F4H         SYMBOL        SKIP_REFRESH
   D:0081H         SYMBOL        SP
-  C:016AH         SYMBOL        STOP1
+  C:0175H         SYMBOL        STOP1
   C:0112H         SYMBOL        SUB_CAL
   C:0000H         LINE#         2
   C:0003H         LINE#         4
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:007DH         LINE#         52
   C:0080H         LINE#         53
   C:0082H         LINE#         55
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  17:52:00  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/31/2023  17:49:00  PAGE 3
 
 
   C:0085H         LINE#         56
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:00EAH         LINE#         119
   C:00EBH         LINE#         120
   C:00EEH         LINE#         121
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  17:52:00  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/31/2023  17:49:00  PAGE 4
 
 
   C:00F0H         LINE#         122
@@ -225,56 +225,62 @@ SYMBOL TABLE OF MODULE:  .\Objects\t12 (STARTUP)
   C:0138H         LINE#         169
   C:013AH         LINE#         170
   C:013CH         LINE#         171
-  C:013DH         LINE#         172
-  C:013EH         LINE#         173
-  C:0140H         LINE#         174
-  C:0142H         LINE#         175
-  C:0144H         LINE#         176
-  C:0146H         LINE#         177
-  C:0147H         LINE#         178
-  C:0148H         LINE#         179
-  C:014AH         LINE#         180
-  C:014CH         LINE#         181
-  C:014EH         LINE#         182
-  C:0150H         LINE#         183
-  C:0151H         LINE#         184
-  C:0152H         LINE#         185
-BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/29/2023  17:52:00  PAGE 5
+  C:013EH         LINE#         172
+  C:013FH         LINE#         173
+  C:0141H         LINE#         174
+  C:0143H         LINE#         175
+  C:0145H         LINE#         176
+  C:0147H         LINE#         177
+  C:0148H         LINE#         178
+  C:0149H         LINE#         179
+  C:014BH         LINE#         180
+  C:014DH         LINE#         181
+  C:014FH         LINE#         182
+  C:0151H         LINE#         183
+  C:0152H         LINE#         184
+  C:0153H         LINE#         185
+BL51 BANKED LINKER/LOCATER V6.22.4.0                                                  10/31/2023  17:49:00  PAGE 5
 
 
-  C:0154H         LINE#         186
-  C:0156H         LINE#         187
-  C:0158H         LINE#         188
-  C:0159H         LINE#         190
-  C:015BH         LINE#         191
-  C:015DH         LINE#         192
-  C:015EH         LINE#         194
-  C:0160H         LINE#         196
-  C:0162H         LINE#         197
-  C:0164H         LINE#         198
-  C:0166H         LINE#         199
-  C:0168H         LINE#         200
-  C:016AH         LINE#         201
-  C:016CH         LINE#         202
-  C:016EH         LINE#         204
-  C:016FH         LINE#         205
-  C:0172H         LINE#         206
-  C:0173H         LINE#         207
-  C:0175H         LINE#         208
-  C:0178H         LINE#         209
+  C:0155H         LINE#         186
+  C:0157H         LINE#         187
+  C:0159H         LINE#         188
+  C:015BH         LINE#         189
+  C:015CH         LINE#         190
+  C:015DH         LINE#         191
+  C:015FH         LINE#         192
+  C:0161H         LINE#         193
+  C:0163H         LINE#         194
+  C:0164H         LINE#         196
+  C:0166H         LINE#         197
+  C:0168H         LINE#         198
+  C:0169H         LINE#         200
+  C:016BH         LINE#         202
+  C:016DH         LINE#         203
+  C:016FH         LINE#         204
+  C:0171H         LINE#         205
+  C:0173H         LINE#         206
+  C:0175H         LINE#         207
+  C:0177H         LINE#         208
   C:0179H         LINE#         210
-  C:017BH         LINE#         211
-  C:017CH         LINE#         212
-  C:017DH         LINE#         214
-  C:017FH         LINE#         215
-  C:0181H         LINE#         216
-  C:0183H         LINE#         217
-  C:0185H         LINE#         218
+  C:017AH         LINE#         211
+  C:017DH         LINE#         212
+  C:017EH         LINE#         213
+  C:0180H         LINE#         214
+  C:0183H         LINE#         215
+  C:0184H         LINE#         216
+  C:0186H         LINE#         217
+  C:0187H         LINE#         218
+  C:0188H         LINE#         220
+  C:018AH         LINE#         221
+  C:018CH         LINE#         222
+  C:018EH         LINE#         223
+  C:0190H         LINE#         224
   -------         ENDMOD        STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0174H BYTE (18%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 017FH BYTE (18%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=416
+Program Size: data=8.0 xdata=0 code=427
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
