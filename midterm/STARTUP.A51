@@ -1,0 +1,333 @@
+ORG	0x00
+ORG	0x30
+INIT:
+		MOV	SP, #0x31
+		SETB RS0
+		MOV	R0, #0
+		MOV	R1, #0
+		MOV	R2, #0
+		CLR	RS0
+		SETB 0x00
+MAIN:
+		CLR	RS0
+		MOV	R0, #0
+		MOV	R1, #4
+		MOV	R2, #0xF7
+SCAN:			
+		SETB P3.2
+		SETB P3.3
+		JNB P3.2, ITR0
+		JNB P3.3, ITR1
+		MOV	A, R2
+		MOV	P2, A
+		JNB	P2.7, KEY_IN
+		INC	R0
+		JNB	P2.6, KEY_IN
+		INC	R0
+		JNB	P2.5, KEY_IN
+		INC	R0
+		JNB	P2.4, KEY_IN
+		INC	R0
+		RR A
+		MOV	R2, A
+		DJNZ R1, SCAN
+KEY_OUT:
+		CALL	DISPLAY			
+		SJMP	MAIN
+KEY_IN:			
+		CALL DEBOUNCE
+		MOV	DPTR, #KB_table
+		MOV	A, R0
+		MOVC A, @A+DPTR
+		CJNE A, #0x00, NEXT11
+		JMP EQUAL
+		NEXT11:
+		CJNE A, #0x0A, NEXT1
+		SJMP OP_IN
+ITR0:
+		CALL DEBOUNCE
+		MOV R0, #250
+		MOV R1, #6
+		MOV R2, #2
+		MOV R3, #1
+		MOV R4, #6
+D0:		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		CALL DISPLAY1
+		DJNZ R0, D0
+		JMP STOP1
+ITR1:
+		CALL DEBOUNCE
+		MOV R1, #6
+		MOV R2, #2
+		MOV R3, #1
+		MOV R4, #6
+		CALL DISPLAYRUN
+		JMP STOP1
+
+NEXT1:
+		CJNE A, #0x0B, NEXT2
+		SJMP OP_IN
+NEXT2:
+		CJNE A, #0x0C, NEXT3
+		SJMP OP_IN
+NEXT3:
+		CJNE A, #0x0D, NEXT4
+		SJMP OP_IN
+NEXT4:
+		CJNE A, #0x0E, NEXT5
+		SJMP L_BRACKETS
+NEXT5:
+		CJNE A, #0x0F, NEXT6
+		SJMP R_BRACKETS
+NEXT6:
+		SJMP SAVE_IN
+L_BRACKETS:
+		SETB RS0
+		MOV	R0, #0
+		MOV	R1, #0
+		MOV	R2, #0
+		JMP	KEY_OUT
+R_BRACKETS:
+		SETB RS0
+		POP	0x0E
+		POP	0x0D
+		POP	0x0C
+		CALL CAL
+		PUSH 0x0B
+		MOV	R0, #0			
+		MOV	R1, #0			
+		MOV	R2, #0			
+		JMP	KEY_OUT
+OP_IN:
+		SETB RS0
+		PUSH 0xE0
+		CLR	0x00
+		MOV	R0, #0
+		MOV	R1, #0
+		MOV	R2, #0
+		JMP	KEY_OUT
+EQUAL:
+		CALL DEBOUNCE
+		SETB RS0
+		MOV	A, SP
+		CJNE A, #0x31, POP_CAL
+		POP	0x0B
+		CALL SET_DEGITS
+		JMP	KEY_OUT
+
+SAVE_IN:
+		SETB RS0
+		MOV	R7, A
+		MOV	A, R1
+		MOV	R0, A
+		MOV	A, R2
+		MOV	R1, A
+		MOV	A, R7
+		MOV	R2, A
+		MOV	A, R0
+		MOV	B, #100
+		MUL	AB
+		MOV	R3, A
+		MOV	A, R1
+		MOV	B, #10
+		MUL	AB
+		MOV	B, R3
+		ADD	A, B
+		MOV	B, R2
+		ADD	A, B
+		MOV	R3, A
+		JNB	0x00, SKIP_REFRESH
+		MOV	A, SP
+		SUBB A, #0x01
+		MOV	SP, A
+SKIP_REFRESH:	
+		PUSH 0x0B
+		SETB 0x00
+		JMP	KEY_OUT
+POP_CAL:		
+		POP	0x0E
+		POP	0x0D
+		POP	0x0C
+		CALL CAL
+		PUSH 0x0B
+		JMP	KEY_OUT
+CAL:
+		MOV	A, R4
+		MOV	B, R6
+		CJNE R5, #0x0A, SUB_CAL
+		ADD	A, B
+		MOV	R3, A
+		CALL SET_DEGITS
+		RET
+SUB_CAL:
+		CJNE R5, #0x0B, MUL_CAL
+		SUBB A, B
+		MOV	R3, A
+		CALL SET_DEGITS
+		RET
+MUL_CAL:
+		CJNE R5, #0x0C, DIV_CAL
+		MUL	AB
+		MOV	R3, A
+		CALL SET_DEGITS
+		RET
+DIV_CAL:
+		DIV	AB
+		MOV	R3, A	
+		CALL SET_DEGITS
+		RET
+DEBOUNCE:		MOV	R5, #3					
+DEL_100_MS:		MOV	R6, #200				
+DEL_500_US:		MOV	R7, #250				
+				DJNZ	R7, $				
+				DJNZ 	R6, DEL_500_US 		
+				DJNZ 	R5, DEL_100_MS 		
+				RET 						
+				
+DISPLAY:		MOV	DPTR, #DP_table		
+				SETB	RS0
+				CLR	P3.4 					
+				MOV	A, #0				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A
+				CALL	DEL_300_US
+				SETB	P3.4
+				CLR	P3.5 				
+				MOV	A, R0				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.5			
+				CLR	P3.6				
+				MOV	A, R1				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.6			
+				CLR	P3.7				
+				MOV	A, R2				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.7
+				RET 					
+
+DEL_300_US:		MOV	R7, #164			
+			DJNZ	R7, $
+			RET
+
+				
+SET_DEGITS:		MOV	A, R3		
+				MOV	B, #10		
+				DIV	AB			
+				MOV	R2, B		
+				MOV	B, #10		
+				DIV	AB			
+				MOV	R1, B		
+				MOV	R0, A		
+				RET				
+
+SHOW:			MOV	R6, #100	
+SHOW1:			CALL	DISPLAY
+			DJNZ	R6, SHOW1
+			DJNZ	R5, SHOW
+			RET
+DISPLAY1:		MOV	DPTR, #DP_table		
+				CLR	P3.4 					
+				MOV	A, R1			
+				MOVC	A, @A+DPTR		
+				MOV	P1, A
+				CALL	DEL_300_US
+				CALL	DEL_300_US
+				SETB	P3.4
+				CLR	P3.5 				
+				MOV	A, R2				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.5			
+				CLR	P3.6				
+				MOV	A, R3				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.6			
+				CLR	P3.7				
+				MOV	A, R4			
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEL_300_US		
+				SETB	P3.7
+				RET 
+				
+DISPLAYRUN:		MOV	DPTR, #DP_table
+				CLR	P3.4 					
+				MOV	A, R1				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				SETB	P3.4
+				CLR	P3.5 				
+				MOV	A, R2			
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEBOUNCE	
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				SETB	P3.5			
+				CLR	P3.6				
+				MOV	A, R3				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				SETB	P3.6			
+				CLR	P3.7				
+				MOV	A, R4				
+				MOVC	A, @A+DPTR		
+				MOV	P1, A				
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				CALL	DEBOUNCE
+				SETB	P3.7
+				RET 
+
+KB_table:		DB		01H		
+				DB		02H		
+				DB		03H		
+				DB		0AH		
+				DB		04H		
+				DB		05H		
+				DB		06H		
+				DB		0BH		
+				DB		07H		
+				DB		08H		
+				DB		09H		
+				DB		0CH		
+				DB		0EH		
+				DB		00H		
+				DB		0FH		
+				DB		0DH		
+				
+DP_table:
+		DB 00000011B ; 0
+		DB 10011111B ; display "1"
+		DB 00100101B ; display "2"
+		DB 00001101B ; display "3"
+		DB 10011001B ; display "4"
+		DB 01001001B ; display "5"
+		DB 01000001B ; display "6"
+		DB 00011011B ; display "7"
+		DB 00000001B ; display "8"
+		DB 00011001B ; display "9"
+			STOP1: JMP STOP1
+END

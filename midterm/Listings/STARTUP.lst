@@ -1,0 +1,412 @@
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\STARTUP.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE STARTUP.A51 SET(SMALL) DEBUG PRINT(.\Listings\STARTUP.lst) OBJECT(.\Obj
+                      ects\STARTUP.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG     0x00
+0030                   2     ORG     0x30
+0030                   3     INIT:
+0030 758131            4                     MOV     SP, #0x31
+0033 D2D3              5                     SETB RS0
+0035 7800              6                     MOV     R0, #0
+0037 7900              7                     MOV     R1, #0
+0039 7A00              8                     MOV     R2, #0
+003B C2D3              9                     CLR     RS0
+003D D200             10                     SETB 0x00
+003F                  11     MAIN:
+003F C2D3             12                     CLR     RS0
+0041 7800             13                     MOV     R0, #0
+0043 7904             14                     MOV     R1, #4
+0045 7AF7             15                     MOV     R2, #0xF7
+0047                  16     SCAN:                   
+0047 D2B2             17                     SETB P3.2
+0049 D2B3             18                     SETB P3.3
+004B 30B22F           19                     JNB P3.2, ITR0
+004E 30B34C           20                     JNB P3.3, ITR1
+0051 EA               21                     MOV     A, R2
+0052 F5A0             22                     MOV     P2, A
+0054 30A715           23                     JNB     P2.7, KEY_IN
+0057 08               24                     INC     R0
+0058 30A611           25                     JNB     P2.6, KEY_IN
+005B 08               26                     INC     R0
+005C 30A50D           27                     JNB     P2.5, KEY_IN
+005F 08               28                     INC     R0
+0060 30A409           29                     JNB     P2.4, KEY_IN
+0063 08               30                     INC     R0
+0064 03               31                     RR A
+0065 FA               32                     MOV     R2, A
+0066 D9DF             33                     DJNZ R1, SCAN
+0068                  34     KEY_OUT:
+0068 3168             35                     CALL    DISPLAY                 
+006A 80D3             36                     SJMP    MAIN
+006C                  37     KEY_IN:                 
+006C 315B             38                     CALL DEBOUNCE
+006E 90021E           39                     MOV     DPTR, #KB_table
+0071 E8               40                     MOV     A, R0
+0072 93               41                     MOVC A, @A+DPTR
+0073 B40002           42                     CJNE A, #0x00, NEXT11
+0076 807A             43                     JMP EQUAL
+0078                  44                     NEXT11:
+0078 B40A30           45                     CJNE A, #0x0A, NEXT1
+007B 8067             46                     SJMP OP_IN
+007D                  47     ITR0:
+007D 315B             48                     CALL DEBOUNCE
+007F 78FA             49                     MOV R0, #250
+0081 7906             50                     MOV R1, #6
+0083 7A02             51                     MOV R2, #2
+0085 7B01             52                     MOV R3, #1
+0087 7C06             53                     MOV R4, #6
+0089 31B4             54     D0:             CALL DISPLAY1
+008B 31B4             55                     CALL DISPLAY1
+008D 31B4             56                     CALL DISPLAY1
+008F 31B4             57                     CALL DISPLAY1
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     2
+
+0091 31B4             58                     CALL DISPLAY1
+0093 31B4             59                     CALL DISPLAY1
+0095 31B4             60                     CALL DISPLAY1
+0097 31B4             61                     CALL DISPLAY1
+0099 D8EE             62                     DJNZ R0, D0
+009B 4138             63                     JMP STOP1
+009D                  64     ITR1:
+009D 315B             65                     CALL DEBOUNCE
+009F 7906             66                     MOV R1, #6
+00A1 7A02             67                     MOV R2, #2
+00A3 7B01             68                     MOV R3, #1
+00A5 7C06             69                     MOV R4, #6
+00A7 31E2             70                     CALL DISPLAYRUN
+00A9 4138             71                     JMP STOP1
+                      72     
+00AB                  73     NEXT1:
+00AB B40B02           74                     CJNE A, #0x0B, NEXT2
+00AE 8034             75                     SJMP OP_IN
+00B0                  76     NEXT2:
+00B0 B40C02           77                     CJNE A, #0x0C, NEXT3
+00B3 802F             78                     SJMP OP_IN
+00B5                  79     NEXT3:
+00B5 B40D02           80                     CJNE A, #0x0D, NEXT4
+00B8 802A             81                     SJMP OP_IN
+00BA                  82     NEXT4:
+00BA B40E02           83                     CJNE A, #0x0E, NEXT5
+00BD 8007             84                     SJMP L_BRACKETS
+00BF                  85     NEXT5:
+00BF B40F02           86                     CJNE A, #0x0F, NEXT6
+00C2 800C             87                     SJMP R_BRACKETS
+00C4                  88     NEXT6:
+00C4 803B             89                     SJMP SAVE_IN
+00C6                  90     L_BRACKETS:
+00C6 D2D3             91                     SETB RS0
+00C8 7800             92                     MOV     R0, #0
+00CA 7900             93                     MOV     R1, #0
+00CC 7A00             94                     MOV     R2, #0
+00CE 8098             95                     JMP     KEY_OUT
+00D0                  96     R_BRACKETS:
+00D0 D2D3             97                     SETB RS0
+00D2 D00E             98                     POP     0x0E
+00D4 D00D             99                     POP     0x0D
+00D6 D00C            100                     POP     0x0C
+00D8 3139            101                     CALL CAL
+00DA C00B            102                     PUSH 0x0B
+00DC 7800            103                     MOV     R0, #0                  
+00DE 7900            104                     MOV     R1, #0                  
+00E0 7A00            105                     MOV     R2, #0                  
+00E2 8084            106                     JMP     KEY_OUT
+00E4                 107     OP_IN:
+00E4 D2D3            108                     SETB RS0
+00E6 C0E0            109                     PUSH 0xE0
+00E8 C200            110                     CLR     0x00
+00EA 7800            111                     MOV     R0, #0
+00EC 7900            112                     MOV     R1, #0
+00EE 7A00            113                     MOV     R2, #0
+00F0 0168            114                     JMP     KEY_OUT
+00F2                 115     EQUAL:
+00F2 315B            116                     CALL DEBOUNCE
+00F4 D2D3            117                     SETB RS0
+00F6 E581            118                     MOV     A, SP
+00F8 B43132          119                     CJNE A, #0x31, POP_CAL
+00FB D00B            120                     POP     0x0B
+00FD 319C            121                     CALL SET_DEGITS
+00FF 0168            122                     JMP     KEY_OUT
+                     123     
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     3
+
+0101                 124     SAVE_IN:
+0101 D2D3            125                     SETB RS0
+0103 FF              126                     MOV     R7, A
+0104 E9              127                     MOV     A, R1
+0105 F8              128                     MOV     R0, A
+0106 EA              129                     MOV     A, R2
+0107 F9              130                     MOV     R1, A
+0108 EF              131                     MOV     A, R7
+0109 FA              132                     MOV     R2, A
+010A E8              133                     MOV     A, R0
+010B 75F064          134                     MOV     B, #100
+010E A4              135                     MUL     AB
+010F FB              136                     MOV     R3, A
+0110 E9              137                     MOV     A, R1
+0111 75F00A          138                     MOV     B, #10
+0114 A4              139                     MUL     AB
+0115 8BF0            140                     MOV     B, R3
+0117 25F0            141                     ADD     A, B
+0119 8AF0            142                     MOV     B, R2
+011B 25F0            143                     ADD     A, B
+011D FB              144                     MOV     R3, A
+011E 300006          145                     JNB     0x00, SKIP_REFRESH
+0121 E581            146                     MOV     A, SP
+0123 9401            147                     SUBB A, #0x01
+0125 F581            148                     MOV     SP, A
+0127                 149     SKIP_REFRESH:   
+0127 C00B            150                     PUSH 0x0B
+0129 D200            151                     SETB 0x00
+012B 0168            152                     JMP     KEY_OUT
+012D                 153     POP_CAL:                
+012D D00E            154                     POP     0x0E
+012F D00D            155                     POP     0x0D
+0131 D00C            156                     POP     0x0C
+0133 3139            157                     CALL CAL
+0135 C00B            158                     PUSH 0x0B
+0137 0168            159                     JMP     KEY_OUT
+0139                 160     CAL:
+0139 EC              161                     MOV     A, R4
+013A 8EF0            162                     MOV     B, R6
+013C BD0A06          163                     CJNE R5, #0x0A, SUB_CAL
+013F 25F0            164                     ADD     A, B
+0141 FB              165                     MOV     R3, A
+0142 319C            166                     CALL SET_DEGITS
+0144 22              167                     RET
+0145                 168     SUB_CAL:
+0145 BD0B06          169                     CJNE R5, #0x0B, MUL_CAL
+0148 95F0            170                     SUBB A, B
+014A FB              171                     MOV     R3, A
+014B 319C            172                     CALL SET_DEGITS
+014D 22              173                     RET
+014E                 174     MUL_CAL:
+014E BD0C05          175                     CJNE R5, #0x0C, DIV_CAL
+0151 A4              176                     MUL     AB
+0152 FB              177                     MOV     R3, A
+0153 319C            178                     CALL SET_DEGITS
+0155 22              179                     RET
+0156                 180     DIV_CAL:
+0156 84              181                     DIV     AB
+0157 FB              182                     MOV     R3, A   
+0158 319C            183                     CALL SET_DEGITS
+015A 22              184                     RET
+015B 7D03            185     DEBOUNCE:               MOV     R5, #3                                  
+015D 7EC8            186     DEL_100_MS:             MOV     R6, #200                                
+015F 7FFA            187     DEL_500_US:             MOV     R7, #250                                
+0161 DFFE            188                                     DJNZ    R7, $                           
+0163 DEFA            189                                     DJNZ    R6, DEL_500_US          
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     4
+
+0165 DDF6            190                                     DJNZ    R5, DEL_100_MS          
+0167 22              191                                     RET                                             
+                     192                                     
+0168 90022E          193     DISPLAY:                MOV     DPTR, #DP_table         
+016B D2D3            194                                     SETB    RS0
+016D C2B4            195                                     CLR     P3.4                                    
+016F 7400            196                                     MOV     A, #0                           
+0171 93              197                                     MOVC    A, @A+DPTR              
+0172 F590            198                                     MOV     P1, A
+0174 3197            199                                     CALL    DEL_300_US
+0176 D2B4            200                                     SETB    P3.4
+0178 C2B5            201                                     CLR     P3.5                            
+017A E8              202                                     MOV     A, R0                           
+017B 93              203                                     MOVC    A, @A+DPTR              
+017C F590            204                                     MOV     P1, A                           
+017E 3197            205                                     CALL    DEL_300_US              
+0180 D2B5            206                                     SETB    P3.5                    
+0182 C2B6            207                                     CLR     P3.6                            
+0184 E9              208                                     MOV     A, R1                           
+0185 93              209                                     MOVC    A, @A+DPTR              
+0186 F590            210                                     MOV     P1, A                           
+0188 3197            211                                     CALL    DEL_300_US              
+018A D2B6            212                                     SETB    P3.6                    
+018C C2B7            213                                     CLR     P3.7                            
+018E EA              214                                     MOV     A, R2                           
+018F 93              215                                     MOVC    A, @A+DPTR              
+0190 F590            216                                     MOV     P1, A                           
+0192 3197            217                                     CALL    DEL_300_US              
+0194 D2B7            218                                     SETB    P3.7
+0196 22              219                                     RET                                     
+                     220     
+0197 7FA4            221     DEL_300_US:             MOV     R7, #164                        
+0199 DFFE            222                             DJNZ    R7, $
+019B 22              223                             RET
+                     224     
+                     225                                     
+019C EB              226     SET_DEGITS:             MOV     A, R3           
+019D 75F00A          227                                     MOV     B, #10          
+01A0 84              228                                     DIV     AB                      
+01A1 AAF0            229                                     MOV     R2, B           
+01A3 75F00A          230                                     MOV     B, #10          
+01A6 84              231                                     DIV     AB                      
+01A7 A9F0            232                                     MOV     R1, B           
+01A9 F8              233                                     MOV     R0, A           
+01AA 22              234                                     RET                             
+                     235     
+01AB 7E64            236     SHOW:                   MOV     R6, #100        
+01AD 3168            237     SHOW1:                  CALL    DISPLAY
+01AF DEFC            238                             DJNZ    R6, SHOW1
+01B1 DDF8            239                             DJNZ    R5, SHOW
+01B3 22              240                             RET
+01B4 90022E          241     DISPLAY1:               MOV     DPTR, #DP_table         
+01B7 C2B4            242                                     CLR     P3.4                                    
+01B9 E9              243                                     MOV     A, R1                   
+01BA 93              244                                     MOVC    A, @A+DPTR              
+01BB F590            245                                     MOV     P1, A
+01BD 3197            246                                     CALL    DEL_300_US
+01BF 3197            247                                     CALL    DEL_300_US
+01C1 D2B4            248                                     SETB    P3.4
+01C3 C2B5            249                                     CLR     P3.5                            
+01C5 EA              250                                     MOV     A, R2                           
+01C6 93              251                                     MOVC    A, @A+DPTR              
+01C7 F590            252                                     MOV     P1, A                           
+01C9 3197            253                                     CALL    DEL_300_US              
+01CB D2B5            254                                     SETB    P3.5                    
+01CD C2B6            255                                     CLR     P3.6                            
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     5
+
+01CF EB              256                                     MOV     A, R3                           
+01D0 93              257                                     MOVC    A, @A+DPTR              
+01D1 F590            258                                     MOV     P1, A                           
+01D3 3197            259                                     CALL    DEL_300_US              
+01D5 D2B6            260                                     SETB    P3.6                    
+01D7 C2B7            261                                     CLR     P3.7                            
+01D9 EC              262                                     MOV     A, R4                   
+01DA 93              263                                     MOVC    A, @A+DPTR              
+01DB F590            264                                     MOV     P1, A                           
+01DD 3197            265                                     CALL    DEL_300_US              
+01DF D2B7            266                                     SETB    P3.7
+01E1 22              267                                     RET 
+                     268                                     
+01E2 90022E          269     DISPLAYRUN:             MOV     DPTR, #DP_table
+01E5 C2B4            270                                     CLR     P3.4                                    
+01E7 E9              271                                     MOV     A, R1                           
+01E8 93              272                                     MOVC    A, @A+DPTR              
+01E9 F590            273                                     MOV     P1, A
+01EB 315B            274                                     CALL    DEBOUNCE
+01ED 315B            275                                     CALL    DEBOUNCE
+01EF 315B            276                                     CALL    DEBOUNCE
+01F1 D2B4            277                                     SETB    P3.4
+01F3 C2B5            278                                     CLR     P3.5                            
+01F5 EA              279                                     MOV     A, R2                   
+01F6 93              280                                     MOVC    A, @A+DPTR              
+01F7 F590            281                                     MOV     P1, A                           
+01F9 315B            282                                     CALL    DEBOUNCE        
+01FB 315B            283                                     CALL    DEBOUNCE
+01FD 315B            284                                     CALL    DEBOUNCE
+01FF D2B5            285                                     SETB    P3.5                    
+0201 C2B6            286                                     CLR     P3.6                            
+0203 EB              287                                     MOV     A, R3                           
+0204 93              288                                     MOVC    A, @A+DPTR              
+0205 F590            289                                     MOV     P1, A                           
+0207 315B            290                                     CALL    DEBOUNCE
+0209 315B            291                                     CALL    DEBOUNCE
+020B 315B            292                                     CALL    DEBOUNCE
+020D D2B6            293                                     SETB    P3.6                    
+020F C2B7            294                                     CLR     P3.7                            
+0211 EC              295                                     MOV     A, R4                           
+0212 93              296                                     MOVC    A, @A+DPTR              
+0213 F590            297                                     MOV     P1, A                           
+0215 315B            298                                     CALL    DEBOUNCE
+0217 315B            299                                     CALL    DEBOUNCE
+0219 315B            300                                     CALL    DEBOUNCE
+021B D2B7            301                                     SETB    P3.7
+021D 22              302                                     RET 
+                     303     
+021E 01              304     KB_table:               DB              01H             
+021F 02              305                                     DB              02H             
+0220 03              306                                     DB              03H             
+0221 0A              307                                     DB              0AH             
+0222 04              308                                     DB              04H             
+0223 05              309                                     DB              05H             
+0224 06              310                                     DB              06H             
+0225 0B              311                                     DB              0BH             
+0226 07              312                                     DB              07H             
+0227 08              313                                     DB              08H             
+0228 09              314                                     DB              09H             
+0229 0C              315                                     DB              0CH             
+022A 0E              316                                     DB              0EH             
+022B 00              317                                     DB              00H             
+022C 0F              318                                     DB              0FH             
+022D 0D              319                                     DB              0DH             
+                     320                                     
+022E                 321     DP_table:
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     6
+
+022E 03              322                     DB 00000011B ; 0
+022F 9F              323                     DB 10011111B ; display "1"
+0230 25              324                     DB 00100101B ; display "2"
+0231 0D              325                     DB 00001101B ; display "3"
+0232 99              326                     DB 10011001B ; display "4"
+0233 49              327                     DB 01001001B ; display "5"
+0234 41              328                     DB 01000001B ; display "6"
+0235 1B              329                     DB 00011011B ; display "7"
+0236 01              330                     DB 00000001B ; display "8"
+0237 19              331                     DB 00011001B ; display "9"
+0238 80FE            332                             STOP1: JMP STOP1
+                     333     END
+A51 MACRO ASSEMBLER  STARTUP                                                              11/01/2023 17:45:38 PAGE     7
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+CAL. . . . . . . .  C ADDR   0139H   A   
+D0 . . . . . . . .  C ADDR   0089H   A   
+DEBOUNCE . . . . .  C ADDR   015BH   A   
+DEL_100_MS . . . .  C ADDR   015DH   A   
+DEL_300_US . . . .  C ADDR   0197H   A   
+DEL_500_US . . . .  C ADDR   015FH   A   
+DISPLAY. . . . . .  C ADDR   0168H   A   
+DISPLAY1 . . . . .  C ADDR   01B4H   A   
+DISPLAYRUN . . . .  C ADDR   01E2H   A   
+DIV_CAL. . . . . .  C ADDR   0156H   A   
+DP_TABLE . . . . .  C ADDR   022EH   A   
+EQUAL. . . . . . .  C ADDR   00F2H   A   
+INIT . . . . . . .  C ADDR   0030H   A   
+ITR0 . . . . . . .  C ADDR   007DH   A   
+ITR1 . . . . . . .  C ADDR   009DH   A   
+KB_TABLE . . . . .  C ADDR   021EH   A   
+KEY_IN . . . . . .  C ADDR   006CH   A   
+KEY_OUT. . . . . .  C ADDR   0068H   A   
+L_BRACKETS . . . .  C ADDR   00C6H   A   
+MAIN . . . . . . .  C ADDR   003FH   A   
+MUL_CAL. . . . . .  C ADDR   014EH   A   
+NEXT1. . . . . . .  C ADDR   00ABH   A   
+NEXT11 . . . . . .  C ADDR   0078H   A   
+NEXT2. . . . . . .  C ADDR   00B0H   A   
+NEXT3. . . . . . .  C ADDR   00B5H   A   
+NEXT4. . . . . . .  C ADDR   00BAH   A   
+NEXT5. . . . . . .  C ADDR   00BFH   A   
+NEXT6. . . . . . .  C ADDR   00C4H   A   
+OP_IN. . . . . . .  C ADDR   00E4H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+POP_CAL. . . . . .  C ADDR   012DH   A   
+RS0. . . . . . . .  B ADDR   00D0H.3 A   
+R_BRACKETS . . . .  C ADDR   00D0H   A   
+SAVE_IN. . . . . .  C ADDR   0101H   A   
+SCAN . . . . . . .  C ADDR   0047H   A   
+SET_DEGITS . . . .  C ADDR   019CH   A   
+SHOW . . . . . . .  C ADDR   01ABH   A   
+SHOW1. . . . . . .  C ADDR   01ADH   A   
+SKIP_REFRESH . . .  C ADDR   0127H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+STOP1. . . . . . .  C ADDR   0238H   A   
+SUB_CAL. . . . . .  C ADDR   0145H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
