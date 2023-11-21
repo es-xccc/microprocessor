@@ -1,0 +1,57 @@
+C51 COMPILER V9.60.7.0   E8B                                                               11/21/2023 22:45:53 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E8B
+OBJECT MODULE PLACED IN .\Objects\e8b.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE e8b.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\e8b.l
+                    -st) TABS(2) OBJECT(.\Objects\e8b.obj)
+
+line level    source
+
+   1          #include <regx52.h>
+   2          
+   3          // Declare UART function
+   4          void init_uart(); 
+   5          
+   6          // Receive data
+   7          char recivevalue; 
+   8          
+   9          void main() {
+  10   1          init_uart();
+  11   1          while (1); // Infinite loop
+  12   1      }
+  13          
+  14          void init_uart() {
+  15   1          SCON = 0x50; // Mode1
+  16   1          TMOD = 0x20; // Timer1 Mode2
+  17   1          TH1 = 0xe6; // Set Baud=1200
+  18   1          TR1 = 1; // Enable TCON Timer1
+  19   1          IE = 0x90; // Enable UART
+  20   1      }
+  21          
+  22          void UART_Isr(void) interrupt 4 { // UART
+  23   1          while (RI == 0); // Wait for receive flag == 1
+  24   1          RI = 0; // Clear flag
+  25   1          recivevalue = SBUF;
+  26   1          P2 = recivevalue; // Display data on LED
+  27   1      
+  28   1          if (recivevalue == 'q') {
+  29   2              SBUF = recivevalue; // Load data
+  30   2              while (TI == 0); // Wait for transmit flag == 1
+  31   2              TI=0; // Clear flag
+  32   2          }
+  33   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     52    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
