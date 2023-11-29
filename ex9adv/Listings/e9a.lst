@@ -1,0 +1,62 @@
+C51 COMPILER V9.60.7.0   E9A                                                               11/28/2023 22:08:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E9A
+OBJECT MODULE PLACED IN .\Objects\e9a.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE e9a.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\e9a.l
+                    -st) TABS(2) OBJECT(.\Objects\e9a.obj)
+
+line level    source
+
+   1          #include <regx52.h>
+   2          
+   3          void main() {
+   4   1          IT0 = 0; // enable a low-level signal on external interrupt
+   5   1          EX0 = 1; // enable INT0
+   6   1          EA = 1; // enable interrupt
+   7   1          P3_4 = 0; // WR=0, clean the data
+   8   1          P3_4 = 1; // WR=1, analog convert to digital
+   9   1          while(1); // infinite loop
+  10   1      }
+  11          
+  12          void int_0(void) interrupt 0 { // INT0 interrupt function 
+  13   1          P3_5 = 0; // RD=0, read the digital data
+  14   1      
+  15   1          if (P1 > 256*8/9) {
+  16   2              P2 = 0; // LED on
+  17   2          } else if (P1 > 256*7/9) {
+  18   2              P2 = 128; // LED on
+  19   2          } else if (P1 > 256*6/9) {
+  20   2              P2 = 192; // LED on
+  21   2          } else if (P1 > 256*5/9) {
+  22   2              P2 = 224; // LED on
+  23   2          } else if (P1 > 256*4/9) {
+  24   2              P2 = 240; // LED on
+  25   2          } else if (P1 > 256*3/9) {
+  26   2              P2 = 248; // LED on
+  27   2          } else if (P1 > 256*2/9) {
+  28   2              P2 = 252; // LED on
+  29   2          } else if (P1 > 256*1/9) {
+  30   2              P2 = 254; // LED on
+  31   2          } else {
+  32   2              P2 = 255; // LED off
+  33   2          }
+  34   1      
+  35   1          P3_5 = 1; // RD=1
+  36   1          P3_4 = 0; // WR=0, clean the data
+  37   1          P3_4 = 1; // WR=1, analog convert to digital
+  38   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    128    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
