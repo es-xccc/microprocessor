@@ -1,0 +1,75 @@
+C51 COMPILER V9.60.7.0   E                                                                 12/06/2023 00:04:17 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E
+OBJECT MODULE PLACED IN .\Objects\e.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE e.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\e.lst) 
+                    -TABS(2) OBJECT(.\Objects\e.obj)
+
+line level    source
+
+   1          #include <regx51.h>
+   2          
+   3          void print_msg(char *);
+   4          void write(char, int);
+   5          void delay(unsigned int);
+   6          
+   7          void main() {
+   8   1          write(0x38, 0); //00111000
+   9   1          write(0x0F, 0); //00001111
+  10   1          write(0x06, 0); //00000110
+  11   1          write(0x01, 0); //00000001
+  12   1          write(0x80, 0); //10000000
+  13   1          print_msg("E94106216");
+  14   1          write(0x40,0); //ROW1
+  15   1          write(0x0A,1);
+  16   1          write(0x41,0); //ROW2
+  17   1          write(0x0A,1);
+  18   1          write(0x42,0); //ROW3
+  19   1          write(0x1F,1);
+  20   1          write(0x43,0); //ROW4
+  21   1          write(0x15,1);
+  22   1          write(0x44,0); //ROW5
+  23   1          write(0x1B,1);
+  24   1          write(0x45,0); //ROW6
+  25   1          write(0x1F,1);
+  26   1          write(0x46,0); //ROW7
+  27   1          write(0x00,1);
+  28   1          write(0xC0, 0); //10000000
+  29   1          write(0x00,1); //write icon 
+  30   1          while (1);
+  31   1      }
+  32          
+  33          void print_msg(char *msg){
+  34   1          for (;*msg!='\0'; msg++){ 
+  35   2              write(*msg,1); 
+  36   2          }
+  37   1      }
+  38          
+  39          void write(char cmd, int rs_value){
+  40   1          P1 = cmd;          //D0-D7
+  41   1          P3_0= rs_value;    //RS
+  42   1          P3_1=1;            // write 0.1ms
+  43   1          delay(100);        
+  44   1          P3_1=0;
+  45   1      }
+  46          
+  47          void delay(unsigned int i){
+  48   1          while (i--);
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    254    ----
+   CONSTANT SIZE    =     10    ----
+C51 COMPILER V9.60.7.0   E                                                                 12/06/2023 00:04:17 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
