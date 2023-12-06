@@ -1,4 +1,4 @@
-#include <regx51.h>
+#include <regx52.h>
 
 void print_msg(char *);
 void write(char, int);
