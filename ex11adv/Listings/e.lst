@@ -1,0 +1,75 @@
+C51 COMPILER V9.60.7.0   E                                                                 12/11/2023 00:14:33 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E
+OBJECT MODULE PLACED IN .\Objects\e.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE e.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\e.lst) 
+                    -TABS(2) OBJECT(.\Objects\e.obj)
+
+line level    source
+
+   1          #include<regx52.h>
+   2          
+   3          code char one_and_half_phase[] = {0x01,0x09,0x08,0x0c,0x04,0x06,0x02,0x03};
+   4          int dir, speed, delay_time;
+   5          
+   6          void delay(int);
+   7          void turn();
+   8          
+   9          void main() {
+  10   1          IT0=1;
+  11   1          IT1=1;
+  12   1          EX0=1;
+  13   1          EX1=1;
+  14   1          EA=1;
+  15   1          delay_time=500;
+  16   1          dir=1;
+  17   1          speed=1;
+  18   1      
+  19   1          while(1) {
+  20   2              turn();
+  21   2          }
+  22   1      }
+  23          
+  24          void turn() {
+  25   1          int x;
+  26   1          if(dir==1) {
+  27   2              for(x=0;x<8;x++) {
+  28   3                  P1=one_and_half_phase[x];
+  29   3                  delay(delay_time);
+  30   3              }
+  31   2          } else {
+  32   2              for(x=8;x>0;x--) {
+  33   3                  P1=one_and_half_phase[x];
+  34   3                  delay(delay_time);
+  35   3              }
+  36   2          }
+  37   1      }
+  38          
+  39          void delay(int t) {
+  40   1          while(t--);
+  41   1      }
+  42          
+  43          void int_0(void) interrupt 0 {
+  44   1          dir=(dir==1)?0:1;
+  45   1      }
+  46          
+  47          void int_1(void) interrupt 2 {
+  48   1          delay_time=(delay_time==500)?3000:500;
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    214    ----
+   CONSTANT SIZE    =      8    ----
+C51 COMPILER V9.60.7.0   E                                                                 12/11/2023 00:14:33 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
