@@ -12,36 +12,36 @@ void main() {
 
     while(1) {
         if(P2 < 25){
-            delay_time=2500;
+            delay_time=4800;
             dir = 0;
         } else if(P2 < 50) {
-            delay_time=2000;
+            delay_time=2400;
             dir = 0;
         } else if(P2 < 75) {
-            delay_time=1500;
+            delay_time=1200;
             dir = 0;
         } else if(P2 < 100) {
-            delay_time=1000;
+            delay_time=600;
             dir = 0;
         } else if(P2 < 128){
-            delay_time=500;
+            delay_time=300;
             dir = 0;
         }
 
         else if(P2 < 153){
-            delay_time=2500;
+            delay_time=4800;
             dir = 1;
         } else if(P2 < 178){
-            delay_time=2000;
+            delay_time=2400;
             dir = 1;
         } else if(P2 < 203){
-            delay_time=1500;
+            delay_time=1200;
             dir = 1;
         } else if(P2 < 228){
-            delay_time=1000;
+            delay_time=600;
             dir = 1;
         } else if(P2 < 257){
-            delay_time=500;
+            delay_time=300;
             dir = 1;
         }
         turn();
@@ -56,7 +56,7 @@ void turn() {
             delay(delay_time);
         }
     } else {
-        for(x=4;x>0;x--) {
+        for(x=3;x>=0;x--) {
             P1=two_phase[x];
             delay(delay_time);
         }

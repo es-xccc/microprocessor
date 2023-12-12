@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   E                                                                 12/11/2023 09:47:29 PAGE 1   
+C51 COMPILER V9.60.7.0   E                                                                 12/12/2023 19:24:55 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E
@@ -22,36 +22,36 @@ line level    source
   12   1      
   13   1          while(1) {
   14   2              if(P2 < 25){
-  15   3                  delay_time=2500;
+  15   3                  delay_time=4800;
   16   3                  dir = 0;
   17   3              } else if(P2 < 50) {
-  18   3                  delay_time=2000;
+  18   3                  delay_time=2400;
   19   3                  dir = 0;
   20   3              } else if(P2 < 75) {
-  21   3                  delay_time=1500;
+  21   3                  delay_time=1200;
   22   3                  dir = 0;
   23   3              } else if(P2 < 100) {
-  24   3                  delay_time=1000;
+  24   3                  delay_time=600;
   25   3                  dir = 0;
   26   3              } else if(P2 < 128){
-  27   3                  delay_time=500;
+  27   3                  delay_time=300;
   28   3                  dir = 0;
   29   3              }
   30   2      
   31   2              else if(P2 < 153){
-  32   3                  delay_time=2500;
+  32   3                  delay_time=4800;
   33   3                  dir = 1;
   34   3              } else if(P2 < 178){
-  35   3                  delay_time=2000;
+  35   3                  delay_time=2400;
   36   3                  dir = 1;
   37   3              } else if(P2 < 203){
-  38   3                  delay_time=1500;
+  38   3                  delay_time=1200;
   39   3                  dir = 1;
   40   3              } else if(P2 < 228){
-  41   3                  delay_time=1000;
+  41   3                  delay_time=600;
   42   3                  dir = 1;
   43   3              } else if(P2 < 257){
-  44   3                  delay_time=500;
+  44   3                  delay_time=300;
   45   3                  dir = 1;
   46   3              }
   47   2              turn();
@@ -62,13 +62,13 @@ line level    source
   52   1          int x;
   53   1          if(dir==1) {
   54   2              for(x=0;x<4;x++) {
-C51 COMPILER V9.60.7.0   E                                                                 12/11/2023 09:47:29 PAGE 2   
+C51 COMPILER V9.60.7.0   E                                                                 12/12/2023 19:24:55 PAGE 2   
 
   55   3                  P1=two_phase[x];
   56   3                  delay(delay_time);
   57   3              }
   58   2          } else {
-  59   2              for(x=4;x>0;x--) {
+  59   2              for(x=3;x>=0;x--) {
   60   3                  P1=two_phase[x];
   61   3                  delay(delay_time);
   62   3              }
@@ -81,7 +81,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    279    ----
+   CODE SIZE        =    275    ----
    CONSTANT SIZE    =      4    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
