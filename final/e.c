@@ -130,7 +130,7 @@ void int_0(void) interrupt 0 {
     delay(65535);
 }
 
-void int_1(void) interrupt 1 {
+void int_1(void) interrupt 2 {
     if(itr1 == 0){
         write(0x01, 0);
         write(0x80, 0);
@@ -142,58 +142,7 @@ void int_1(void) interrupt 1 {
         delay(65535);
     }
     else if(itr1 == 1){
-        write(0x01, 0);
-        write(0x80, 0);
-        print_msg("Final exam      ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg(" Final exam     ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("  Final exam    ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("   Final exam   ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("    Final exam  ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("     Final exam ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("      Final exam");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("m      Final exa");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("am      Final ex");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("xam      Final e");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("exam      Final ");
-        delay(65535);
-        write(0x01, 0);
-        print_msg(" exam      Final");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("l exam      Fina");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("al exam      Fin");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("nal exam      Fi");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("inal exam      F");
-        delay(65535);
-        write(0x01, 0);
-        print_msg("Final exam      ");
-        delay(65535);
+
     }
     else if(itr1 == 2){
         
@@ -201,6 +150,10 @@ void int_1(void) interrupt 1 {
 
     itr1++;
     delay(65535);
+}
+
+void timer_0(void) interrupt 1 {
+    
 }
 
 void print_msg(char msg[]) {
