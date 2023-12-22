@@ -8,11 +8,16 @@ int itr0 = 0; // interrupt 0 counter
 int itr1 = 0; // interrupt 1 counter
 
 void main() {
+    IT0=1;
+    IT1=1;
+    EX0=1;
+    EX1=1;
+    EA=1;
     write(0x38, 0); // use 2 lines and 5x7 matrix
     write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
     write(0x06, 0); // increment cursor
     write(0x01, 0); // clear screen
-    while(1){
+    while(itr0 == 0){
         write(0x01, 0); // clear screen
         write(0x80, 0); // DDRAM 1st row 1st column (00H)
         if(P0 < 81){
@@ -63,6 +68,24 @@ void main() {
         }
         delay(16384);
     }
+    while(1);
+}
+
+void int_0(void) interrupt 0 {
+    P2_0=0;
+    if(itr0 == 0){
+        write(0x0B, 0);
+    }
+    else if(itr0 == 1){
+        write(0x0F, 0);
+    }
+    else if(itr0 == 2){
+    }
+
+}
+
+void int_1(void) interrupt 1 {
+
 }
 
 void print_msg(char msg[]) {
