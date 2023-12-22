@@ -7,10 +7,12 @@ void delay(unsigned int);
 int itr0 = 0; // interrupt 0 counter
 int itr1 = 0; // interrupt 1 counter
 void main() {
+    TMOD = 0x02;
     IT0=0;
     IT1=0;
     EX0=1;
     EX1=1;
+    PT0=1;
     EA=1;
     write(0x38, 0); // use 2 lines and 5x7 matrix
     write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
