@@ -26,10 +26,18 @@ Rebuild target 'Target 1'
 assembling STARTUP.A51...
 compiling e.c...
 linking...
-Program Size: data=18.0 xdata=0 code=854
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_PRINT_MSG?E
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?INT_0?E
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_PRINT_MSG?E
+    CALLER1: ?PR?INT_0?E
+    CALLER2: ?PR?INT_1?E
+Program Size: data=28.0 xdata=0 code=1800
 creating hex file from ".\Objects\final"...
-".\Objects\final" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:01
+".\Objects\final" - 0 Error(s), 2 Warning(s).
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

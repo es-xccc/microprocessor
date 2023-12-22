@@ -6,10 +6,9 @@ void write(char, int);
 void delay(unsigned int);
 int itr0 = 0; // interrupt 0 counter
 int itr1 = 0; // interrupt 1 counter
-
 void main() {
-    IT0=1;
-    IT1=1;
+    IT0=0;
+    IT1=0;
     EX0=1;
     EX1=1;
     EA=1;
@@ -17,7 +16,7 @@ void main() {
     write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
     write(0x06, 0); // increment cursor
     write(0x01, 0); // clear screen
-    while(itr0 == 0){
+    while(1){
         write(0x01, 0); // clear screen
         write(0x80, 0); // DDRAM 1st row 1st column (00H)
         if(P0 < 81){
@@ -66,26 +65,142 @@ void main() {
         else if(P0 < 256){
             print_msg("============");
         }
-        delay(16384);
+        delay(16383);
     }
-    while(1);
 }
 
 void int_0(void) interrupt 0 {
-    P2_0=0;
     if(itr0 == 0){
-        write(0x0B, 0);
+        write(0x08, 0);
+        P2_0=0;
     }
     else if(itr0 == 1){
         write(0x0F, 0);
+        write(0x01, 0);
+        write(0x80, 0);
+        print_msg("E94106216");
+
+        //skull
+        write(0x40,0); //RAM POSITION
+        write(0x00,1);
+        write(0x0E,1);
+        write(0x1F,1);
+        write(0x15,1);
+        write(0x0E,1);
+        write(0x0E,1);
+        write(0x00,1);
+        write(0x00,1); //CURSOR
+        //smile------------------------------------
+        write(0x48,0); //RAM POSITION
+        write(0x00,1);
+        write(0x0A,1);
+        write(0x0A,1);
+        write(0x00,1);
+        write(0x11,1);
+        write(0x0E,1);
+        write(0x00,1);	
+        write(0x00,1);	//CURSOR
+
+        write(0xCE,0);//PRINT POSITION
+        write(0x00,1);
+        write(0xCF,0);//PRINT POSITION
+        write(0x01,1);
+
+        P2_1=0;
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
     }
     else if(itr0 == 2){
+        P2_2=0;
+        write(0x01, 0);
+        write(0x80, 0);
+        print_msg("1");
+        write(0xC0, 0);
+        print_msg("2");
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
     }
-
+    itr0++;
+    delay(65535);
 }
 
 void int_1(void) interrupt 1 {
+    if(itr1 == 0){
+        write(0x01, 0);
+        write(0x80, 0);
+        print_msg("Final exam      ");
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
+        delay(65535);
+    }
+    else if(itr1 == 1){
+        write(0x01, 0);
+        write(0x80, 0);
+        print_msg("Final exam      ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg(" Final exam     ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("  Final exam    ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("   Final exam   ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("    Final exam  ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("     Final exam ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("      Final exam");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("m      Final exa");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("am      Final ex");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("xam      Final e");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("exam      Final ");
+        delay(65535);
+        write(0x01, 0);
+        print_msg(" exam      Final");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("l exam      Fina");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("al exam      Fin");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("nal exam      Fi");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("inal exam      F");
+        delay(65535);
+        write(0x01, 0);
+        print_msg("Final exam      ");
+        delay(65535);
+    }
+    else if(itr1 == 2){
+        
+    }
 
+    itr1++;
+    delay(65535);
 }
 
 void print_msg(char msg[]) {
