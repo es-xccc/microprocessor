@@ -1,4 +1,4 @@
-C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 13:50:13 PAGE 1   
+C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 20:52:22 PAGE 1   
 
 
 C51 COMPILER V9.60.7.0, COMPILATION OF MODULE E
@@ -62,7 +62,7 @@ line level    source
   52   3              }
   53   2              else if(P0 < 120){
   54   3                  print_msg("=====");
-C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 13:50:13 PAGE 2   
+C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 20:52:22 PAGE 2   
 
   55   3              }
   56   2              else if(P0 < 140){
@@ -126,7 +126,7 @@ line level    source
  114   2              write(0xCE,0);//PRINT POSITION
  115   2              write(0x00,1);
  116   2              write(0xCF,0);//PRINT POSITION
-C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 13:50:13 PAGE 3   
+C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 20:52:22 PAGE 3   
 
  117   2              write(0x01,1);
  118   2      
@@ -190,7 +190,7 @@ line level    source
  176   1          P3_6 = rs_value; // RS=rs (1or0)
  177   1          P3_7 = 1; // ENABLE high
  178   1          delay(100);
-C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 13:50:13 PAGE 4   
+C51 COMPILER V9.60.7.0   E                                                                 12/23/2023 20:52:22 PAGE 4   
 
  179   1          P3_7 = 0; // ENABLE low
  180   1      }
