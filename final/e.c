@@ -12,6 +12,7 @@ char roll_msg[] = "Final exam      ";
 void main() {
     TMOD = 0x02;
     PT0=1;
+    ET0=1;
     TL0=0x00;
     TH0=0x00;
 
@@ -24,7 +25,7 @@ void main() {
     write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
     write(0x06, 0); // increment cursor
     write(0x01, 0); // clear screen
-    while(1){
+    while(itr0==0 && itr1==0){
         write(0x01, 0); // clear screen
         write(0x80, 0); // DDRAM 1st row 1st column (00H)
         if(P0 < 81){
@@ -75,6 +76,7 @@ void main() {
         }
         delay(16383);
     }
+    while(1);
 }
 
 void int_0(void) interrupt 0 {
@@ -115,11 +117,6 @@ void int_0(void) interrupt 0 {
         write(0x01,1);
 
         P2_1=0;
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
     }
     else if(itr0 == 2){
         P2_2=0;
@@ -128,12 +125,8 @@ void int_0(void) interrupt 0 {
         print_msg("1");
         write(0xC0, 0);
         print_msg("2");
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
     }
+
     itr0++;
     delay(65535);
 }
@@ -143,14 +136,10 @@ void int_1(void) interrupt 2 {
         write(0x01, 0);
         write(0x80, 0);
         print_msg("Final exam      ");
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
-        delay(65535);
     }
     else if(itr1 == 1){
         TR0=1;
+        P2_0=0;
     }
     else if(itr1 == 2){
         TR0=0;
@@ -161,19 +150,19 @@ void int_1(void) interrupt 2 {
 }
 
 void timer_0(void) interrupt 1 {
-    int i=0;
+    int k;
     char temp;
-    counter++;
-    if(counter == 65535){
-        print_msg(roll_msg);
-        temp = roll_msg[15];
-        for(i=15; i>0; i--){
-            roll_msg[i] = roll_msg[i-1];
-        }
-        roll_msg[0] = temp;
-        counter = 0;
-        delay(65535);
+    P2_1=0;
+    P2_2=0;
+    write(0x01, 0);
+    write(0x80, 0);
+    print_msg(roll_msg);
+    temp = roll_msg[15];
+    for(k=15; k>0; k--){
+        roll_msg[k] = roll_msg[k-1];
     }
+    roll_msg[0] = temp;
+    delay(65535);
 }
 
 void print_msg(char msg[]) {
