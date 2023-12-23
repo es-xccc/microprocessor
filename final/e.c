@@ -6,13 +6,19 @@ void write(char, int);
 void delay(unsigned int);
 int itr0 = 0; // interrupt 0 counter
 int itr1 = 0; // interrupt 1 counter
+int counter = 0; // timer counter
+char roll_msg[] = "Final exam      ";
+
 void main() {
     TMOD = 0x02;
+    PT0=1;
+    TL0=0x00;
+    TH0=0x00;
+
     IT0=0;
     IT1=0;
     EX0=1;
     EX1=1;
-    PT0=1;
     EA=1;
     write(0x38, 0); // use 2 lines and 5x7 matrix
     write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
@@ -144,10 +150,10 @@ void int_1(void) interrupt 2 {
         delay(65535);
     }
     else if(itr1 == 1){
-
+        TR0=1;
     }
     else if(itr1 == 2){
-        
+        TR0=0;
     }
 
     itr1++;
@@ -155,7 +161,19 @@ void int_1(void) interrupt 2 {
 }
 
 void timer_0(void) interrupt 1 {
-    
+    int i=0;
+    char temp;
+    counter++;
+    if(counter == 65535){
+        print_msg(roll_msg);
+        temp = roll_msg[15];
+        for(i=15; i>0; i--){
+            roll_msg[i] = roll_msg[i-1];
+        }
+        roll_msg[0] = temp;
+        counter = 0;
+        delay(65535);
+    }
 }
 
 void print_msg(char msg[]) {
