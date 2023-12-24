@@ -6,12 +6,14 @@ void write(char, int);
 void delay(unsigned int);
 int itr0 = 0; // interrupt 0 counter
 int itr1 = 0; // interrupt 1 counter
-int counter = 0; // timer counter
+int counter0 = 0; // timer counter
+int counter1 = 0; // timer counter
 char roll_msg[] = "Final exam      ";
+int roll_count = 0;
 
 void main() {
     TMOD = 0x02;
-    PT0=1;
+    PX1=1;
     ET0=1;
     TL0=0x00;
     TH0=0x00;
@@ -142,9 +144,11 @@ void int_1(void) interrupt 2 {
         P2_0=0;
     }
     else if(itr1 == 2){
+
+    }
+    else if(itr1 == 3){
         TR0=0;
     }
-
     itr1++;
     delay(65535);
 }
@@ -152,17 +156,38 @@ void int_1(void) interrupt 2 {
 void timer_0(void) interrupt 1 {
     int k;
     char temp;
-    P2_1=0;
-    P2_2=0;
-    write(0x01, 0);
-    write(0x80, 0);
-    print_msg(roll_msg);
-    temp = roll_msg[15];
-    for(k=15; k>0; k--){
-        roll_msg[k] = roll_msg[k-1];
+    counter0++;
+    if(counter0 == 255){
+        counter1++;
+        counter0 = 0;
     }
-    roll_msg[0] = temp;
-    delay(65535);
+    if(counter1 == 10){
+        if(itr1 == 2){
+            temp = roll_msg[15];
+            for(k=15; k>0; k--){
+                roll_msg[k] = roll_msg[k-1];
+            }
+            roll_msg[0] = temp;
+            write(0x01, 0);
+            write(0x80, 0);
+            print_msg(roll_msg);
+            counter1=0;
+        }
+        else if(itr1 == 3){
+            if(roll_count>10){
+                strcpy(roll_msg, "      Final exam");
+            }
+            else{
+                for(k=0; k<16; k++){
+                    roll_msg[k] = roll_msg[k+1];
+                }
+            }
+            write(0x01, 0);
+            write(0x80, 0);
+            print_msg(roll_msg);
+            counter1=0;
+        }
+    }
 }
 
 void print_msg(char msg[]) {
