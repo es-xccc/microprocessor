@@ -10,6 +10,9 @@ int counter0 = 0; // timer counter
 int counter1 = 0; // timer counter
 char roll_msg[] = "Final exam      ";
 int roll_count = 0;
+char adc_msg[4];
+int adc_count = 0;
+int hundreds, tens, ones;
 
 void main() {
     TMOD = 0x02;
@@ -30,15 +33,15 @@ void main() {
     while(itr0==0 && itr1==0){
         write(0x01, 0); // clear screen
         write(0x80, 0); // DDRAM 1st row 1st column (00H)
-        if(P0 < 81){
-            print_msg("LOW");
-        }
-        else if(P0 < 171){
-            print_msg("MIDDLE");
-        }
-        else if(P0 < 256){
-            print_msg("HIGH");
-        }
+        
+        hundreds = P0 / 100;
+        tens = (P0 / 10) % 10;
+        ones = P0 % 10;
+        adc_msg[0] = hundreds + 48;
+        adc_msg[1] = tens + 48;
+        adc_msg[2] = ones + 48;
+        print_msg(adc_msg);
+
         write(0xC0, 0); // DDRAM 2nd row 1st column (40H)
         if(P0 < 20){
             print_msg("=");
