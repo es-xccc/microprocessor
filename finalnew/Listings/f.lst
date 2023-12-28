@@ -1,0 +1,221 @@
+C51 COMPILER V9.60.7.0   F                                                                 12/27/2023 19:26:02 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE F
+OBJECT MODULE PLACED IN .\Objects\f.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE f.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\f.lst) 
+                    -TABS(2) OBJECT(.\Objects\f.obj)
+
+line level    source
+
+   1          #include <regx52.h>
+   2          #include <string.h>
+   3          
+   4          void print_msg(char[]);
+   5          void write(char, int); 
+   6          void delay(unsigned int);
+   7          int counter0 = 0;
+   8          int counter1 = 0;
+   9          int counter2 = 0;
+  10          int counter3 = 0;
+  11          int int0dis = 0;
+  12          char int0_msg[3];
+  13          int i = 0;
+  14          int hundreds, tens, ones;
+  15          char roll_msg[] = "I love embedded system.";
+  16          char temp;
+  17          int k = 0;
+  18          int icopy = 0;
+  19          char icopy_msg[16];
+  20          
+  21          void main() {
+  22   1          TMOD = 0x22;
+  23   1          PX1=1;
+  24   1          ET0=1;
+  25   1          ET1=1;
+  26   1          TL0=0x00;
+  27   1          TH0=0x00;
+  28   1          TL1=0x00;
+  29   1          TH1=0x00;
+  30   1          IT0=0;
+  31   1          IT1=0;
+  32   1          EX0=0;
+  33   1          EX1=1;
+  34   1          EA=1;
+  35   1          write(0x38, 0); // use 2 lines and 5x7 matrix
+  36   1          write(0x08, 0);
+  37   1          delay(65535);
+  38   1          delay(65535);
+  39   1          delay(65535);
+  40   1          write(0x0F, 0); // LCD ON, cursor ON, cursor blinking ON
+  41   1          write(0x06, 0); // increment cursor
+  42   1          write(0x01, 0); // clear screen
+  43   1          while(1){
+  44   2              if(P0 < 120){
+  45   3                  TR1 = 0;
+  46   3                  P2_0 = 0;
+  47   3                  P2_1 = 1;
+  48   3                  P2_2 = 1;
+  49   3                  if(P3_2 == 0){
+  50   4                      TR0 = 1;
+  51   4                  }
+  52   3                  else{
+  53   4                      TR0 = 0;
+  54   4                  }
+C51 COMPILER V9.60.7.0   F                                                                 12/27/2023 19:26:02 PAGE 2   
+
+  55   3              }
+  56   2              else if(P0 < 180){
+  57   3                  P2_0 = 1;
+  58   3                  P2_1 = 0;
+  59   3                  P2_2 = 1;
+  60   3                  TR0 = 0;
+  61   3                  TR1 = 0;
+  62   3                  write(0x0F, 0);
+  63   3                  write(0x01, 0);
+  64   3                  write(0x80, 0);
+  65   3                  print_msg("E94106216");
+  66   3      
+  67   3                  //skull
+  68   3                  write(0x40,0); //RAM POSITION
+  69   3                  write(0x00,1);
+  70   3                  write(0x0E,1);
+  71   3                  write(0x1F,1);
+  72   3                  write(0x15,1);
+  73   3                  write(0x0E,1);
+  74   3                  write(0x0E,1);
+  75   3                  write(0x00,1);
+  76   3                  write(0x00,1); //CURSOR
+  77   3                  //smile------------------------------------
+  78   3                  write(0x48,0); //RAM POSITION
+  79   3                  write(0x00,1);
+  80   3                  write(0x0A,1);
+  81   3                  write(0x0A,1);
+  82   3                  write(0x00,1);
+  83   3                  write(0x11,1);
+  84   3                  write(0x0E,1);
+  85   3                  write(0x00,1);  
+  86   3                  write(0x00,1);  //CURSOR
+  87   3      
+  88   3                  write(0x8E,0);//PRINT POSITION
+  89   3                  write(0x00,1);
+  90   3                  write(0x8F,0);//PRINT POSITION
+  91   3                  write(0x01,1);
+  92   3      
+  93   3                  write(0xC0,0);
+  94   3                  print_msg("Final exam");
+  95   3                  delay(65535);
+  96   3                  write(0x01, 0);
+  97   3              }
+  98   2              else if(P0 < 256){
+  99   3                  P2_0 = 1;
+ 100   3                  P2_1 = 1;
+ 101   3                  P2_2 = 0;
+ 102   3                  TR0 = 0;
+ 103   3                  TR1 = 1;
+ 104   3              }
+ 105   2          }
+ 106   1      }
+ 107          
+ 108          void int_1(void) interrupt 2 {
+ 109   1          if(P0 >= 120 && P0 < 180){
+ 110   2              write(0x01, 0);
+ 111   2              write(0x80, 0);
+ 112   2              print_msg("1");
+ 113   2              write(0xC0, 0);
+ 114   2              print_msg("2");
+ 115   2              delay(65535);
+ 116   2              delay(65535);
+C51 COMPILER V9.60.7.0   F                                                                 12/27/2023 19:26:02 PAGE 3   
+
+ 117   2              delay(65535);
+ 118   2              delay(65535);
+ 119   2              delay(65535);
+ 120   2              delay(65535);
+ 121   2          }
+ 122   1      }
+ 123          
+ 124          void timer_0(void) interrupt 1 {
+ 125   1          counter0++;
+ 126   1          hundreds = int0dis / 100;
+ 127   1          tens = (int0dis / 10) % 10;
+ 128   1          ones = int0dis % 10;
+ 129   1          int0_msg[0] = hundreds + 48;
+ 130   1          int0_msg[1] = tens + 48;
+ 131   1          int0_msg[2] = ones + 48;
+ 132   1          if(counter0 == 255){
+ 133   2              counter1++;
+ 134   2              counter0 = 0;
+ 135   2          }
+ 136   1          if(counter1 == 10){
+ 137   2              if(int0dis < 100){
+ 138   3                  int0dis += 5;
+ 139   3              }
+ 140   2              counter1 = 0;
+ 141   2              write(0x01, 0);
+ 142   2              write(0x80, 0);
+ 143   2              print_msg(int0_msg);
+ 144   2              print_msg("%");
+ 145   2              write(0xC0, 0);
+ 146   2              for(i = 0; i < int0dis / 10; i++){
+ 147   3                  print_msg("=");
+ 148   3              }
+ 149   2              print_msg(">");
+ 150   2          }
+ 151   1      }
+ 152          
+ 153          void timer_1(void) interrupt 3 {
+ 154   1          counter2++;
+ 155   1          if(counter2 == 255){
+ 156   2              counter3++;
+ 157   2              counter2 = 0;
+ 158   2          }
+ 159   1          if(counter3 == 10){
+ 160   2              temp = roll_msg[0];
+ 161   2              for(k=0; k<22; k++){
+ 162   3                  roll_msg[k] = roll_msg[k+1];
+ 163   3              }
+ 164   2              roll_msg[22] = temp;
+ 165   2              write(0x01, 0);
+ 166   2              write(0x80, 0);
+ 167   2              for(icopy = 0; icopy < 16; icopy++){
+ 168   3                  icopy_msg[icopy] = roll_msg[icopy];
+ 169   3              }
+ 170   2              print_msg(icopy_msg);
+ 171   2              counter3=0;
+ 172   2          }
+ 173   1      }
+ 174          
+ 175          void print_msg(char msg[]) {
+ 176   1          int i;
+ 177   1          for (i=0; i<strlen(msg); i++) // for every character
+ 178   1              write(msg[i], 1); // monitor displays character
+C51 COMPILER V9.60.7.0   F                                                                 12/27/2023 19:26:02 PAGE 4   
+
+ 179   1      }
+ 180          
+ 181          void write(char cmd, int rs_value) {
+ 182   1          P1 = cmd; // P1=cmd
+ 183   1          P3_6 = rs_value; // RS=rs (1or0)
+ 184   1          P3_7 = 1; // ENABLE high
+ 185   1          delay(100);
+ 186   1          P3_7 = 0; // ENABLE low
+ 187   1      }
+ 188          
+ 189          void delay(unsigned int i) {
+ 190   1          while (i--); 
+ 191   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1099    ----
+   CONSTANT SIZE    =     31    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     66       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
